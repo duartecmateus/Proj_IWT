@@ -18,3 +18,9 @@ a {
   text-decoration: none;
   font-size: large;
 }
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  left: 35%;
+}

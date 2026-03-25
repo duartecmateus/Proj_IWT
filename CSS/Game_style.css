@@ -1,11 +1,26 @@
-.game_grid {
+.pieces {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    width: 100vw;
-    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .game_grid img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.game_grid {
+  width: 840px;
+  height: 840px;
+  position: relative;
+
+  /* Grid background */
+  background-image: 
+    linear-gradient(to right, burlywood 1px, transparent 1px),
+    linear-gradient(to bottom, burlywood 1px, transparent 1px);
+
+  background-size: 120px 120px; /* size of each cell */
+  background-color: #222; /* board color */
+  margin: auto;
+
+  
 }
