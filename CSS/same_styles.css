@@ -19,6 +19,21 @@ a {
   font-size: large;
 }
 
+header {
+  position: fixed;
+  left: 10px;
+  top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 footer {
   position: absolute;
   bottom: 0px;
