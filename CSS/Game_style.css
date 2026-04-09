@@ -23,3 +23,28 @@
 
   
 }
+
+@media screen and (max-width: 800px) {
+  .game_grid {
+    width: 98%;
+    height: 96vw; /* Or whatever height you prefer */
+    position: relative;
+
+  background-image: 
+    linear-gradient(to right, burlywood 1px, transparent 1px),
+    linear-gradient(to bottom, burlywood 1px, transparent 1px);
+
+  /* This makes the grid cells exactly 1/10th of the screen width */
+  background-size: 12vw 12vw; 
+  
+  background-color: rgb(49, 47, 47);
+  margin: auto;
+}
+
+.game_grid img {
+  width: 12vw;
+  height: 12vw;
+  display: block;
+}
+  
+}

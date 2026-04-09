@@ -11,10 +11,24 @@ h2 {
 }
 
 main {
-    margin-top: 120px;
+    margin-top: 250px;
     margin-left: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
+header {
+    position: fixed;
+}
+
+@media screen and (max-width: 999px) {
+    main {
+    margin-top: 250px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+}

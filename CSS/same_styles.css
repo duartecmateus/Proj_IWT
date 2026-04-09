@@ -20,12 +20,12 @@ a {
 }
 
 header {
-  position: fixed;
+  float: left;
   left: 10px;
   top: 15px;
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 220px;
 }
 
 main {
@@ -58,6 +58,12 @@ footer {
   main {
     margin-top: 100px;
     
+  }
+
+  footer {
+    position: absolute;
+    left: 10%;
+    width: 100%;
   }
   
 }
