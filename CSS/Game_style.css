@@ -20,11 +20,13 @@
   background-size: 100px 100px; /* size of each cell*/
   background-color: rgb(49, 47, 47); /* board color*/
   margin: auto;
+
+  
 }
 
 @media screen and (max-width: 800px) {
   .game_grid {
-    width: 98%;
+    width: 9%;
     height: 96vw; /* Or whatever height you prefer */
     position: relative;
 
