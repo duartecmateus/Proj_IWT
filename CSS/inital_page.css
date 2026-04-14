@@ -1,0 +1,185 @@
+    /*-----------------General--------------------*/
+ 
+ body{
+  background-color: antiquewhite;
+  margin: 0px;
+ }
+
+ main {
+    padding-top: 20px; 
+ }
+
+.yellow {
+  color: rgb(234, 203, 4) !important;
+  margin-bottom: 0px;
+ }
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    color: darkblue; 
+}
+ 
+.mini_bar {
+  background-color:rgb(226, 159, 2) ;
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: 30px;
+ }
+
+.title-content, .rules, .power-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+ }
+
+   /*-----------------Title--------------------*/
+
+  .title {
+    background-color: darkblue;
+    min-height: auto;
+    padding-bottom: 30px;
+  }
+
+  .title-content > * {
+    color:whitesmoke;
+  }
+  .title-content > h1 {
+    font-size: 80px;
+    margin: 10px 0px 10px 10px;
+  }
+
+  #play_button {
+    background-color:rgb(234, 203, 4) ;
+    padding: 20px 50px;
+    border-radius: 50px;
+    margin-top: 30px;
+    text-decoration: none;
+    color: darkblue;
+    font-size: 25px;
+  }
+
+  #play_button:hover {
+    background-color: white;
+    color: orange;
+    transform: scale(1.2);
+  }
+
+    /*-----------------Rules--------------------*/
+
+  .rules{ /*POSSO??????????DUPLICADOOO*/
+    min-height: auto;
+    padding-bottom: 30px;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 80px;
+    width: 90%;
+  }
+
+  .card {
+    background-color: white;
+    padding: 20px;
+    border: 3px solid rgb(177, 177, 177);
+    border-radius: 15px;
+    margin-top: 30px;
+  }
+
+  .rules h2 {
+    color: darkblue; 
+    font-weight: bolder;
+  }
+
+  .rules p {
+    color: grey;
+  }
+
+  /*-----------------Egg-Gallery/ Powersss--------------------*/
+
+  .egg-gallery {
+    background-color: darkblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+    min-height: auto;
+    padding-bottom: 30px;
+  }
+  
+  .egg-grid, .power-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 40px;
+    justify-content: space-around;
+    width: 95%;
+  }
+
+  .egg-card, .power-card{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px;
+  }
+
+  .emoji {
+    font-size: 50px;
+  }
+
+.power-section {
+    background-color: darkblue;
+    min-height: auto;
+    padding-bottom: 30px;
+}
+  /*-----------------Media_Types--------------------*/
+
+  /*Tablets*/
+@media screen and (max-width:1024px) {
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        gap:0px;
+        width: 80%;
+    }
+
+    .egg-grid, .power-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width:720px) {
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        gap:0px;
+        width: 80%;
+    }
+
+    .egg-grid, .power-grid{
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 80%;
+        gap: 20px;
+    }
+
+    .egg-card, .egg-card >* ,.power-card, .power-card >* {
+           padding: 3px;
+           margin: 0px;
+    }
+
+    .emoji {
+        font-size: 40px;
+  }
+
+}
