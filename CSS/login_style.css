@@ -1,7 +1,3 @@
-* {
-  font-family: sans-serif;
-}
-
 #description {
   display: flex;
   flex-direction: column;
@@ -30,10 +26,21 @@ h2 {
   color: darkblue;
 }
 
+.log_btn {
+  display: flex;
+  height: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 4px solid #FFE45C;
+  background: #FDC500;
+}
+
 /*................main...............*/
 
 main {
-  width: 100%;
   background: #ffe7e6;
   position: relative;
   top: 40px;
