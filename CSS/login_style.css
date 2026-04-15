@@ -1,34 +1,93 @@
+* {
+  font-family: sans-serif;
+}
+
 #login, #create_account {
-    border: 2px solid brown;
+    border: 2px solid #F4E4C1;
+    background: #FFFBF0;
     border-radius: 10px;
     padding: 10px;
     width: 400px;
     margin: 50px;
 }
 
+h1 {
+    font-size: 40px;
+}
+
 h2 {
     margin: 0px;
 }
 
-main {
-    margin-top: 250px;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.darkblue {
+  color: darkblue;
 }
 
-header {
-    position: fixed;
+/*................main...............*/
+
+main {
+  width: 100%;
+  background: #FFF9E6;
+  position: relative;
+  top: 40px;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+main a{
+  text-decoration: none;
+  color: gray;
+  padding: 5px 10px;
+}
+
+main a:hover {
+  color: rgb(234, 203, 4);
+}
+
+main a:active {
+  color: darkblue;
+}
+
+.yellow {
+  color: rgb(234, 203, 4) !important;
+  margin-bottom: 0px;
+}
+
+/*............. Footer ............*/
+
+footer {
+
+  position: relative;
+  top: 40px;
 }
 
 @media screen and (max-width: 999px) {
-    main {
-    margin-top: 250px;
-    margin-left: 20px;
+  main {
+    position: relative;
+    top: 40px;
+    padding-top: 50px;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     }
+}
+
+@media screen and (min-width: 1000px) {
+  main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #hori_boxes {
+    display: flex;
+  }  
 }
