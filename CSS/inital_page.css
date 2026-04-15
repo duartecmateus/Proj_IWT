@@ -1,9 +1,10 @@
-    /*-----------------General--------------------*/
+    /*-----------------Global--------------------*/
  
  body{
   background-color: antiquewhite;
   margin: 0px;
   font-family: sans-serif;
+  /*line-height: 1.6; séra que metemos?????*/ 
  }
 
  main {
@@ -11,17 +12,9 @@
  }
 
 .yellow {
-  color: #FDC500 !important;
+  color: #FDC500;
   margin-bottom: 0px;
  }
-
-h1 {
-    font-size: 40px;
-}
-
-h2 {
-    color: darkblue; 
-}
  
 .mini_bar {
   background-color:#FDC500 ;
@@ -29,40 +22,56 @@ h2 {
   height: 4px;
   border-radius: 2px;
   margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  color: darkblue; 
+}
+
+.title-content, 
+.rules, 
+.egg-gallery, 
+.power-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0px 40px 0;
+  min-height: auto;
  }
 
-.title-content, .rules, .power-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 50px;
- }
+.title, 
+.egg-gallery, 
+.power-section {                                /* é considerado duplicado?*/
+    background-color: darkblue;
+}
 
    /*-----------------Title--------------------*/
-
-  .title {
-    background-color: darkblue;
-    min-height: auto;
-    padding-bottom: 30px;
-  }
 
   .title-content > * {
     color:whitesmoke;
   }
+
   .title-content > h1 {
+    color: #FDC500;
     font-size: 80px;
-    margin: 10px 0px 10px 10px;
+    margin: 10px 10px 0px 10px;
   }
 
   #play_button {
     background-color:#FDC500 ;
     padding: 20px 50px;
-    border-radius: 50px;
     margin-top: 30px;
+    border-radius: 50px;
     text-decoration: none;
     color: darkblue;
     font-size: 25px;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
   }
 
   #play_button:hover {
@@ -73,28 +82,22 @@ h2 {
 
     /*-----------------Rules--------------------*/
 
-  .rules{ /*POSSO??????????DUPLICADOOO*/
-    min-height: auto;
-    padding-bottom: 30px;
-  }
-
   .cards-container {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
-    gap: 80px;
+    gap: 40px;
     width: 90%;
   }
 
   .card {
     background-color: white;
-    padding: 20px;
     border: 3px solid rgb(177, 177, 177);
     border-radius: 15px;
-    margin-top: 30px;
+    padding: 20px;
+    margin-top: 10px;
   }
 
-  .rules h2 {
+  .rules h3 {
     color: darkblue; 
     font-weight: bolder;
   }
@@ -104,23 +107,11 @@ h2 {
   }
 
   /*-----------------Egg-Gallery/ Powersss--------------------*/
-
-  .egg-gallery {
-    background-color: darkblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 60px;
-    min-height: auto;
-    padding-bottom: 30px;
-  }
   
   .egg-grid, .power-grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 40px;
-    justify-content: space-around;
     width: 95%;
   }
 
@@ -129,6 +120,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 3px solid #FDC500;
     border-radius: 15px;
     padding: 10px;
   }
@@ -136,51 +128,41 @@ h2 {
   .emoji {
     font-size: 50px;
   }
-
-.power-section {
-    background-color: darkblue;
-    min-height: auto;
-    padding-bottom: 30px;
-}
   /*-----------------Media_Types--------------------*/
 
   /*Tablets*/
 @media screen and (max-width:1024px) {
     .cards-container {
-        display: flex;
-        flex-direction: column;
-        gap:0px;
-        width: 80%;
+      width: 80%;
+      flex-direction: column;
+      gap:10px;
     }
 
     .egg-grid, .power-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 }
 
 @media screen and (max-width:720px) {
     .cards-container {
-        display: flex;
-        flex-direction: column;
-        gap:0px;
-        width: 80%;
+      flex-direction: column;
+      gap:0px;
+      width: 80%;
     }
 
     .egg-grid, .power-grid{
-        display: grid;
-        grid-template-columns: 1fr;
-        width: 80%;
-        gap: 20px;
+      width: 85%;
+      grid-template-columns: 1fr;
+      grid-gap: 20px;
     }
 
     .egg-card, .egg-card >* ,.power-card, .power-card >* {
-           padding: 3px;
-           margin: 0px;
+      padding: 3px;
+      margin: 0px;
     }
 
     .emoji {
-        font-size: 40px;
+      font-size: 40px;
   }
 
 }
