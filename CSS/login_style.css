@@ -2,6 +2,13 @@
   font-family: sans-serif;
 }
 
+#description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #login, #create_account {
     border: 2px solid #F4E4C1;
     background: #FFFBF0;
@@ -27,11 +34,10 @@ h2 {
 
 main {
   width: 100%;
-  background: #FFF9E6;
+  background: #ffe7e6;
   position: relative;
   top: 40px;
   padding-top: 50px;
-  padding-left: 20px;
   padding-bottom: 20px;
   display: flex;
   flex-direction: row;
@@ -57,14 +63,6 @@ main a:active {
   margin-bottom: 0px;
 }
 
-/*............. Footer ............*/
-
-footer {
-
-  position: relative;
-  top: 40px;
-}
-
 @media screen and (max-width: 999px) {
   main {
     position: relative;
@@ -76,6 +74,11 @@ footer {
     justify-content: center;
     align-items: center;
     }
+
+  footer {
+    position: relative;
+    top: 40px;
+  }
 }
 
 @media screen and (min-width: 1000px) {
@@ -89,5 +92,11 @@ footer {
 
   #hori_boxes {
     display: flex;
-  }  
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+  }
 }
