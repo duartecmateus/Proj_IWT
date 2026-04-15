@@ -1,0 +1,93 @@
+#description {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#sign_up {
+  display: flex;
+  flex-direction: column;
+  border: 4px solid #00296B;
+  background: #FFFBF0;
+  border-radius: 24px;
+  padding: 10px;
+  width: 400px;
+  margin: 50px;
+}
+
+h1 {
+    font-size: 40px;
+    text-align: center;
+}
+
+h2 {
+    margin: 0px;
+}
+
+.darkblue {
+  color: darkblue;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+#sign_btn {
+  display: flex;
+  height: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 4px solid #FFE45C;
+  background: #FDC500;
+  font-size:x-large;
+  gap: 10px;
+}
+
+/*................main...............*/
+
+main {
+  background: #ffe7e6;
+  position: relative;
+  top: 40px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+main a{
+  text-decoration: none;
+}
+
+.yellow {
+  color: rgb(234, 203, 4) !important;
+  margin-bottom: 0px;
+}
+
+#Tip_container {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  border-radius: 16px;
+  border: 3px solid #FFD23F;
+  background: rgba(255, 210, 63, 0.30)
+}
+
+/*.............. FOOTER ...............*/
+
+footer {
+  font-size: small;
+  position: relative;
+  top: 40px;
+  bottom: 0px;
+}
