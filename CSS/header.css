@@ -2,6 +2,7 @@
  header {
   background-color: white;
   position: fixed;
+  z-index: 2;
   left: 0;
   right: 0;
   display: flex;
@@ -10,6 +11,9 @@
   padding: 5px;
   height: 30px;
   border-bottom: 2px solid gray;
+  font-family: sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.15px;
  }
 
  header > nav {
@@ -41,6 +45,9 @@
     justify-content: center;
     align-items: center; 
     height: 50px;
+    color: darkblue;
+    border-top: 4px solid #FDC500;
+    background: #F2E8CF;
  }
 
 
