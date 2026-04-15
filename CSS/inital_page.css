@@ -3,6 +3,7 @@
  body{
   background-color: antiquewhite;
   margin: 0px;
+  font-family: sans-serif;
  }
 
  main {
@@ -10,7 +11,7 @@
  }
 
 .yellow {
-  color: rgb(234, 203, 4) !important;
+  color: #FDC500 !important;
   margin-bottom: 0px;
  }
 
@@ -23,7 +24,7 @@ h2 {
 }
  
 .mini_bar {
-  background-color:rgb(226, 159, 2) ;
+  background-color:#FDC500 ;
   width: 50px;
   height: 4px;
   border-radius: 2px;
@@ -55,7 +56,7 @@ h2 {
   }
 
   #play_button {
-    background-color:rgb(234, 203, 4) ;
+    background-color:#FDC500 ;
     padding: 20px 50px;
     border-radius: 50px;
     margin-top: 30px;
@@ -66,7 +67,7 @@ h2 {
 
   #play_button:hover {
     background-color: white;
-    color: orange;
+    color: #FDC500;
     transform: scale(1.2);
   }
 

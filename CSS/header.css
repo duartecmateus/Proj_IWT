@@ -21,7 +21,7 @@
  }
 
  header p{
-    color: rgb(234, 203, 4) !important;
+    color: #FDC500 !important;
  }
 
   header a{
@@ -31,7 +31,7 @@
 
  }
  header nav a:hover {
-  color: rgb(234, 203, 4);
+  color: #FDC500;
  }
 
  header nav a:active {
