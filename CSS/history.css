@@ -187,6 +187,80 @@ h1 {
     margin: 0; 
 }
 
+  /*-----------------Leaderboard------------------*/
+
+.leaderboard {
+    background-color: #0a235b; /* Azul escuro do painel */
+    padding: 40px;
+    border-radius: 20px;
+    border: 4px solid #f1c40f;; /* Borda exterior creme */
+    width: 90%;
+    box-shadow: 0 15px 20px #f1c40f;;
+}
+
+.leaderboard > h1 {
+    margin: 10px 0px 50px;
+}
+
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.player-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border: 3px solid white;
+    border-radius: 15px;
+    color: white;
+    transition: transform 0.2s;
+}
+
+/* Efeito especial para o primeiro lugar como na imagem */
+.highlight {
+    border-width: 4px;
+    box-shadow: 0 0 35px rgb(253, 236, 88);
+}
+
+.rank-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.rank-number {
+    font-size: 25px;
+    font-weight: bold;
+    min-width: 40px;
+}
+
+.avatar {
+    font-size: 30px;
+    background: #07183eca;
+    padding: 5px;
+    border-radius: 45%;
+}
+
+.player-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.world-score {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Hover simples para interatividade */
+.player-card:hover {
+    transform: scale(1.02);
+    background: #07183eca;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .podium, .faq-grid {
