@@ -55,11 +55,40 @@ input {
   background: #FFFBF0;
 }
 
+.avatar_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.avatar_option {
+  height: 58px;
+  border: 3px solid #ecd7a6;
+  border-radius: 14px;
+  background: #fbf7ed;
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.avatar_option:hover {
+  transform: translateY(-2px);
+}
+
+.avatar_option.selected {
+  border-color: #ffbf00;
+  background: #fff2bf;
+}
+
 #sign_btn {
   display: flex;
   height: 50px;
   padding-left: 50px;
   padding-right: 50px;
+  margin-top: 15px;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
@@ -74,9 +103,9 @@ input {
 main {
   background: #ffe7e6;
   position: relative;
-  top: 40px;
-  padding-top: 50px;
-  padding-bottom: 20px;
+  top: 30px;
+  padding-top: 60px;
+  padding-bottom: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +120,11 @@ main a{
   color: rgb(234, 203, 4) !important;
   margin-bottom: 0px;
 }
+
+#log_fixing {
+  text-align: center;
+}
+
 
 #Tip_container {
   height: 70px;
@@ -109,6 +143,6 @@ main a{
 footer {
   font-size: small;
   position: relative;
-  top: 40px;
+  top: 30px;
   bottom: 0px;
 }
