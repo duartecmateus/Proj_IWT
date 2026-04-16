@@ -29,13 +29,14 @@ h2 {
 }
 
 h3 {
-  color: darkblue; 
+  color: #00296B; 
 }
 
 .title-content, 
 .rules, 
 .egg-gallery, 
-.power-section {
+.power-section,
+.video{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,7 +48,7 @@ h3 {
 .title, 
 .egg-gallery, 
 .power-section {                                /* é considerado duplicado?*/
-    background-color: darkblue;
+    background-color: #00296B;
 }
 
    /*-----------------Title--------------------*/
@@ -68,7 +69,7 @@ h3 {
     margin-top: 30px;
     border-radius: 50px;
     text-decoration: none;
-    color: darkblue;
+    color: #00296B;
     font-size: 25px;
     font-weight: bold;
     transition: transform 0.3s ease, background-color 0.3s ease;
@@ -80,7 +81,7 @@ h3 {
     transform: scale(1.2);
   }
 
-    /*-----------------Rules--------------------*/
+    /*-----------------Rule--------------------*/
 
   .cards-container {
     display: flex;
@@ -98,12 +99,44 @@ h3 {
   }
 
   .rules h3 {
-    color: darkblue; 
+    color: #00296B; 
     font-weight: bolder;
   }
 
   .rules p {
     color: grey;
+  }
+    /*-----------------Video--------------------*/
+
+.video-card {
+    background-color: white;
+    border: 3px solid rgb(177, 177, 177);
+    border-radius: 15px;
+    padding: 40px 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-card > * {
+  margin: 20px;
+}
+
+.video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00296B;
+    padding: 40px 200px;
+    border-radius: 30px;
+}
+ .video-placeholder > * {
+      color: #FDC500;
+      font-weight: 600;
+ }
+  .video-card > cite {
+    color:rgb(177, 177, 177); 
+    font-size: 20px;
   }
 
   /*-----------------Egg-Gallery/ Powersss--------------------*/
