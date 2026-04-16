@@ -49,7 +49,7 @@ h1 {
     background: white;
     border-radius: 20px;
     padding: 25px 35px;
-    box-shadow: 6px 6px 0px rgba(10, 35, 91, 0.1); /* Sombra sólida estilizada */
+    box-shadow: 6px 6px 0px rgba(10, 35, 91, 0.1); /* Sombra sólida */
 }
 
 .card h3 {
@@ -76,23 +76,19 @@ h1 {
     min-width: 80px;
     text-align: center;
     font-size: 16px;
-    box-shadow: 4px 4px 0px #FDC500;
-    
+    box-shadow: 4px 4px 0px #FDC500;   
 }
 
-
-
-/* Títulos das Seções */
-.section-title {
+.title {
     color: #f1c40f;
     text-align: center;
     font-size: 36px;
     font-weight: 900;
-    margin-top: 60px;
-    margin-bottom: 5px;
+    margin: 70px 0px 5px;
 }
 
-/* Podium Styles */
+  /*-----------------Hall_of_Fame--------------------*/
+
 .podium {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -101,7 +97,6 @@ h1 {
 }
 
 .podium-card {
-    background: #fff;
     border: 3px solid #0a235b;
     border-radius: 20px;
     padding: 30px 10px;
@@ -109,37 +104,57 @@ h1 {
     transition: transform 0.3s;
 }
 
-.podium-card:hover { transform: translateY(-5px); }
-
-.podium-card.gold { background-color: #f7d358; }
-.podium-card.silver { background-color: #f9e79f; }
-.podium-card.bronze { background-color: #fdfae6; }
-
-.rank { font-size: 40px; font-weight: 900; color: #0a235b; display: block; }
-.username { font-weight: bold; color: #0a235b; margin: 10px 0; font-size: 14px; }
-.score { font-size: 32px; font-weight: 900; color: #0a235b; margin: 0; }
-.points-label { font-size: 10px; color: #5d6d7e; font-weight: bold; }
-
-/* Barra de Score Azul */
-.user-score-bar {
-    background-color: #7d8ea3; /* Cor acinzentada azulada */
-    border-radius: 15px;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    margin-bottom: 80px;
+.podium-card:hover { 
+    transform: translateY(-5px); 
 }
 
-.user-info { display: flex; align-items: center; gap: 15px; }
-.trophy-icon { font-size: 24px; color: #f1c40f; }
-.user-info .label { font-weight: bold; margin: 0; font-size: 14px; }
-.user-info .sub-label { font-size: 12px; margin: 0; color: #d5dbdb; }
-.user-info a { color: #f1c40f; text-decoration: underline; }
-.big-score { font-size: 36px; font-weight: 900; color: #f1c40f; }
+.podium-card.gold { 
+    background-color: #f7d358; 
+}
 
-/* Grid de FAQ */
+.podium-card.silver { 
+    background-color: #f9e79f; 
+}
+
+.podium-card.bronze { 
+    background-color: #fdfae6; 
+}
+
+.rank { 
+    font-size: 40px; 
+    font-weight: 900; 
+    color: #0a235b; 
+    display: block; 
+}
+
+.username { 
+    font-weight: bold; 
+    color: #0a235b; 
+    margin: 10px 0;
+    font-size: 14px; 
+}
+
+.score {
+    font-size: 32px; 
+    font-weight: 900; 
+    color: #0a235b; 
+    margin: 0; 
+}
+
+.points-label { 
+    font-size: 10px; 
+    color: #5d6d7e; 
+    font-weight: bold; 
+}
+
+  /*-----------------Score_Bar--------------------*/
+
+
+
+
+  
+  /*-----------------Grid_de_FAQ------------------*/
+
 .faq-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -154,9 +169,23 @@ h1 {
     color: white;
 }
 
-.faq-card .emoji { font-size: 35px; display: block; margin-bottom: 15px; }
-.faq-card h4 { margin: 0 0 10px 0; font-size: 16px; }
-.faq-card p { color: #f1c40f; font-weight: bold; font-size: 14px; margin: 0; }
+.emoji {  
+    display: block; 
+    margin-bottom: 10px; 
+    font-size: 30px;
+}
+
+.faq-card h3 { 
+    margin: 0 0 10px 0; 
+    font-size: 15px; 
+}
+
+.faq-card p { 
+    color: #f1c40f; 
+    font-weight: bold; 
+    font-size: 13px; 
+    margin: 0; 
+}
 
 /* Responsividade */
 @media (max-width: 768px) {
