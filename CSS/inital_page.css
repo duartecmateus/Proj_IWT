@@ -101,7 +101,9 @@ h3 {
     background-color: white;
     border: 3px solid rgb(177, 177, 177);
     border-radius: 15px;
-    padding: 40px 200px;
+    padding: 40px 20px;
+    width: 90%;
+    box-sizing: border-box; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,8 +118,9 @@ h3 {
     flex-direction: column;
     align-items: center;
     background-color: #00296B;
-    padding: 40px 200px;
+    padding: 40px 0px;
     border-radius: 30px;
+    width: 80%;
 }
  .video-placeholder > * {
       color: #FDC500;
@@ -165,11 +168,24 @@ h3 {
     }
 }
 
-@media screen and (max-width:720px) {
+ /* Smartphones */
+@media screen and (max-width:768px) {
+   .title-content h1 {
+      font-size: 60px;
+    }
+
+    .title-content > * {
+      font-size: 15px;
+  }
+
     .cards-container {
       flex-direction: column;
       gap:0px;
       width: 80%;
+    }
+
+    .video-title {
+      text-align: center;
     }
 
     .egg-grid, .power-grid{

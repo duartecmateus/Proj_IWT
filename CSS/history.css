@@ -91,7 +91,7 @@ h1 {
 
 .podium {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin: 40px 0;
 }
@@ -147,55 +147,17 @@ h1 {
     font-weight: bold; 
 }
 
-  /*-----------------Score_Bar--------------------*/
-
-
-
-
-  
-  /*-----------------Grid_de_FAQ------------------*/
-
-.faq-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.faq-card {
-    background-color: #0a235b;
-    border-radius: 20px;
-    padding: 30px;
-    color: white;
-}
-
-.emoji {  
-    display: block; 
-    margin-bottom: 10px; 
-    font-size: 30px;
-}
-
-.faq-card h3 { 
-    margin: 0 0 10px 0; 
-    font-size: 15px; 
-}
-
-.faq-card p { 
-    color: #f1c40f; 
-    font-weight: bold; 
-    font-size: 13px; 
-    margin: 0; 
-}
-
   /*-----------------Leaderboard------------------*/
 
 .leaderboard {
-    background-color: #0a235b; /* Azul escuro do painel */
+    background-color: #0a235b;
     padding: 40px;
     border-radius: 20px;
-    border: 4px solid #f1c40f;; /* Borda exterior creme */
-    width: 90%;
-    box-shadow: 0 15px 20px #f1c40f;;
+    box-sizing: border-box;
+    border: 4px solid #f1c40f;
+    width: 100%;
+    margin: 0 auto; 
+    box-shadow: 0 15px 20px #f1c40f;
 }
 
 .leaderboard > h1 {
@@ -220,7 +182,6 @@ h1 {
     transition: transform 0.2s;
 }
 
-/* Efeito especial para o primeiro lugar como na imagem */
 .highlight {
     border-width: 4px;
     box-shadow: 0 0 35px rgb(253, 236, 88);
@@ -255,16 +216,64 @@ h1 {
     font-weight: bold;
 }
 
-/* Hover simples para interatividade */
 .player-card:hover {
     transform: scale(1.02);
     background: #07183eca;
 }
 
-/* Responsividade */
+  /*-----------------Grid_de_FAQ------------------*/
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.faq-card {
+    background-color: #0a235b;
+    border-radius: 20px;
+    padding: 30px;
+    color: white;
+}
+
+.emoji {  
+    display: block; 
+    margin-bottom: 10px; 
+    font-size: 30px;
+}
+
+.faq-card h3 { 
+    margin: 0 0 10px 0; 
+    font-size: 15px; 
+}
+
+.faq-card p { 
+    color: #f1c40f; 
+    font-weight: bold; 
+    font-size: 13px; 
+    margin: 0; 
+}
+
+
+
+/* Smartphones */
 @media (max-width: 768px) {
+    .badge {
+        padding: 10px 4px;
+        font-size: 13px;
+        text-align: center;
+        box-shadow: 2px 2px 0px #FDC500;   
+}
+
+    .player-card {
+        flex-direction: column;
+    }
+
     .podium, .faq-grid {
         grid-template-columns: 1fr;
+        width: 90%;
+        margin: auto;
     }
 }
 
