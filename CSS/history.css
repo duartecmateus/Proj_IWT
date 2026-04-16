@@ -1,8 +1,87 @@
-@media screen and (max-width: 499px) {
-    main {
-    display: flex;
+
+main {
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+/* Títulos e Cabeçalho da Seção */
+h1 {
+    text-align: center;
+    color: #00296B;
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.mini-bar {   /* meter nos headers??????*/
+  background-color: #FDC500 ;
+  width: 50px;
+  height: 4px;
+  border-radius: 2px;
+  margin: 5px auto 30px;
+}
+
+.quote {
+    text-align: center;
+    font-style: italic;
+    color: rgb(97, 97, 97);
+    margin-bottom: 60px;
+}
+
+/* Estrutura das Linhas (Timeline) */
+
+.egg-chronicles {
+    display: grid;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    }
+    width: 100%;
+    margin: auto;
 }
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0px auto 40px;
+}
+
+/* Cards Brancos */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px 35px;
+    box-shadow: 6px 6px 0px rgba(10, 35, 91, 0.1); /* Sombra sólida estilizada */
+}
+
+.card h3 {
+    color: #00296B;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0;
+}
+
+.card p {
+    color: rgb(97, 97, 97);
+    line-height: 1.6;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* Etiquetas (Badges) */
+.badge {
+    background-color: #00296B;
+    color: #FDC500;
+    padding: 15px 20px;
+    font-weight: bold;
+    border: 3px solid #FDC500;
+    border-radius: 6px;
+    min-width: 80px;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 4px 4px 0px #FDC500;
+    
+}
+
+

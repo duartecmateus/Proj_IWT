@@ -1,27 +1,16 @@
     /*-----------------Global--------------------*/
- 
- body{
-  background-color: antiquewhite;
-  margin: 0px;
-  font-family: sans-serif;
-  /*line-height: 1.6; séra que metemos?????*/ 
- }
-
- main {
-    padding-top: 20px; 
- }
 
 .yellow {
   color: #FDC500;
   margin-bottom: 0px;
  }
  
-.mini_bar {
-  background-color:#FDC500 ;
+.mini-bar {   /* meter nos headers??????*/
+  background-color: #FDC500 ;
   width: 50px;
   height: 4px;
   border-radius: 2px;
-  margin-bottom: 30px;
+  margin: 5px auto 30px;
 }
 
 h2 {
