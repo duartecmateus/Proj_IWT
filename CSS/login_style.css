@@ -1,5 +1,5 @@
-* {
-  margin: 0px;
+body{
+  height: 100%;
 }
 
 #description {
@@ -36,9 +36,32 @@ h2 {
   font-weight: bold;
 }
 
+/*................. Interacteble .............*/
+
+input {
+  width: 90%;
+  height: 90%;
+  border: none;
+  border-radius: 24px;
+  background: #FFFBF0;
+}
+
+.input_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 40px;
+  padding-left: 20px ;
+  border-radius: 24px;
+  border: 3px solid #F4E4C1;
+  background: #FFFBF0;
+}
+
 #log_btn {
   display: flex;
   height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding-left: 50px;
   padding-right: 50px;
   justify-content: center;
@@ -55,9 +78,10 @@ h2 {
 main {
   background: #ffe7e6;
   position: relative;
-  top: 40px;
+  top: 35px;
   padding-top: 50px;
   padding-bottom: 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,13 +97,17 @@ main a{
   margin-bottom: 0px;
 }
 
+#log_fixing {
+  text-align: center;
+}
+
 #Tip_container {
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
-
+  margin-bottom: 50px;
   border-radius: 16px;
   border: 3px solid #FFD23F;
   background: rgba(255, 210, 63, 0.30)
@@ -90,6 +118,6 @@ main a{
 footer {
   font-size: small;
   position: relative;
-  top: 40px;
+  top: 35px;
   bottom: 0px;
 }
