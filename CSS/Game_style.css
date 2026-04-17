@@ -220,6 +220,8 @@ h1 {
 
 /* ÁREA DO JOGO (frigideira) */
 
+
+
 .pieces {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -236,8 +238,8 @@ h1 {
   position: relative;
 
   background-image: 
-    linear-gradient(to right, burlywood 1px, transparent 1px),
-    linear-gradient(to bottom, burlywood 1px, transparent 1px);
+    linear-gradient(to right, rgba(245, 245, 245, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 245, 245, 0.6) 1px, transparent 1px);
 
   background-size: 100px 100px; /* size of each cell*/
   background-color: rgb(49, 47, 47); /* board color*/
