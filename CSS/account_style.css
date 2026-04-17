@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   background-color: #F4E4C1;
@@ -20,6 +16,7 @@ body {
   justify-content: center;
   padding: 20px 0;
   margin: 30px auto;
+  margin-top: 80px;
 }
 
 .profile_box {

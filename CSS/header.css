@@ -12,7 +12,7 @@
 
 /*-----------------HEADER--------------------*/
  header {
-  background-color: white;
+  background: #F2E8CF;
   position: fixed;
   z-index: 2;
   top: 0px;
@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  padding: 15px;
   height: 30px;
   border-bottom: 2px solid gray;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -2px rgba(0, 0, 0, 0.10);
@@ -49,6 +49,10 @@
 
  header nav a:active {
    color: darkblue;
+ }
+
+ .right_side{
+  font-size: 50%;
  }
    /*-----------------Footer--------------------*/
 
