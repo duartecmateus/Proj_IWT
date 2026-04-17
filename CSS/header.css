@@ -53,15 +53,17 @@
    /*-----------------Footer--------------------*/
 
  footer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    height: 50px;
-    color: darkblue;
-    border-top: 4px solid #FDC500;
-    background: #F2E8CF;
- }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  height: 50px;
+  color: darkblue;
+  border-top: 4px solid #FDC500;
+  background: #F2E8CF;
+  font-size: small;
+}
+
 
 * {
   font-family: sans-serif;
@@ -78,5 +80,6 @@
     padding: 5px 3px;
   }
 }
+
 
 
