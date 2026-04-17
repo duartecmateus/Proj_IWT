@@ -1,7 +1,11 @@
 Duarte Mateus N62019: HTML e CSS da página Account, desenvolvimento do Design, esforço: 33% 
 
-Gabriel Lima N62796: HTML e CSS das páginas Home e History, esforço: 33%
+Gabriel Lima N62796: HTML e CSS das páginas Home ,History e a Grid da página game_window, esforço: 33%
 
 Miguel Moreira N59712: HTML e CSS das páginas Login e Singin, esforço: 33%
 
 Todos: HTML e CSS da página game_window, todos participámos de forma equivalente para o trabalho
+
+
+Indicações sobre como executar o projeto:
+    Começa por abrir a página home e partir de aí navegue para as outras páginas.
