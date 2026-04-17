@@ -1,8 +1,8 @@
-    /*-----------------Global--------------------*/
+    /*-----------------Global/Shared Styles--------------------*/
 
-.yellow {
+.headers {
   color: #FDC500;
-  margin-bottom: 0px;
+  margin-bottom: 0;
  }
  
 .mini-bar {   /* meter nos headers??????*/
@@ -31,16 +31,15 @@ h3 {
   justify-content: center;
   align-items: center;
   padding: 50px 0px 40px 0;
-  min-height: auto;
  }
 
 .title, 
 .egg-gallery, 
-.power-section {                                /* é considerado duplicado?*/
+.power-section {
     background-color: #00296B;
 }
 
-   /*-----------------Title--------------------*/
+   /*-----------------Title Section--------------------*/
 
   .title-content > * {
     color:whitesmoke;
@@ -70,16 +69,16 @@ h3 {
     transform: scale(1.2);
   }
 
-    /*-----------------Rule--------------------*/
+    /*-----------------Rules--------------------*/
 
-  .cards-container {
+  .rules-container{
     display: flex;
     justify-content: space-around;
     gap: 40px;
     width: 90%;
   }
 
-  .card {
+  .rules-card {
     background-color: white;
     border: 3px solid rgb(177, 177, 177);
     border-radius: 15px;
@@ -103,7 +102,7 @@ h3 {
     border-radius: 15px;
     padding: 40px 20px;
     width: 90%;
-    box-sizing: border-box; 
+    box-sizing: border-box; /*meter no body????*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,11 +139,11 @@ h3 {
     width: 95%;
   }
 
-  .egg-card, .power-card{
-    background-color: white;
+  .game-card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
     border: 3px solid #FDC500;
     border-radius: 15px;
     padding: 10px;
@@ -157,7 +156,7 @@ h3 {
 
   /*Tablets*/
 @media screen and (max-width:1024px) {
-    .cards-container {
+    .rules-container {
       width: 80%;
       flex-direction: column;
       gap:10px;
@@ -194,7 +193,7 @@ h3 {
       grid-gap: 20px;
     }
 
-    .egg-card, .egg-card >* ,.power-card, .power-card >* {
+    .game-card, .game-card >*{
       padding: 3px;
       margin: 0px;
     }
@@ -205,7 +204,7 @@ h3 {
 }
 
 /* Small Smartphones */
-@media (max-width: 800px) {
+@media (max-width: 400px) {
   .title-content h1 {
       font-size: 45px;
     }
@@ -221,6 +220,4 @@ h3 {
     .egg-gallery h2 {
       text-align: center;
     }
-
-
 }

@@ -1,15 +1,9 @@
 
+/*-----------------Global/Shared Styles--------------------*/
+
 main {
     max-width: 1100px;
     margin: 20px auto;
-}
-  /*-----------------Egg_Chronicles--------------------*/
-h1 {
-    text-align: center;
-    color: #00296B;
-    font-size: 42px;
-    font-weight: 900;
-    margin-bottom: 10px;
 }
 
 .mini-bar {   /* meter nos headers??????*/
@@ -20,6 +14,16 @@ h1 {
   margin: 5px auto 30px;
 }
 
+  /*-----------------Egg_Chronicles--------------------*/
+
+h1 {
+    text-align: center;
+    color: #00296B;
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
 .quote {
     text-align: center;
     font-style: italic;
@@ -27,9 +31,8 @@ h1 {
     margin-bottom: 60px;
 }
 
-
 .egg-chronicles {
-    display: grid;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -42,7 +45,7 @@ h1 {
     align-items: center;
     gap: 20px;
     width: 100%;
-    margin: 0px auto 40px;
+    margin: 0 auto 40px;
 }
 
 .card {
@@ -97,7 +100,7 @@ h1 {
 }
 
 .podium-card {
-    border: 3px solid #0a235b;
+    border: 3px solid #00296B;
     border-radius: 20px;
     padding: 30px 10px;
     text-align: center;
@@ -123,13 +126,13 @@ h1 {
 .rank { 
     font-size: 40px; 
     font-weight: 900; 
-    color: #0a235b; 
+    color: #00296B; 
     display: block; 
 }
 
 .username { 
     font-weight: bold; 
-    color: #0a235b; 
+    color: #00296B; 
     margin: 10px 0;
     font-size: 14px; 
 }
@@ -137,7 +140,7 @@ h1 {
 .score {
     font-size: 32px; 
     font-weight: 900; 
-    color: #0a235b; 
+    color: #00296B; 
     margin: 0; 
 }
 
@@ -150,7 +153,7 @@ h1 {
   /*-----------------Leaderboard------------------*/
 
 .leaderboard {
-    background-color: #0a235b;
+    background-color: #00296B;
     padding: 40px;
     border-radius: 20px;
     box-sizing: border-box;
@@ -160,7 +163,7 @@ h1 {
     box-shadow: 0 15px 20px #f1c40f;
 }
 
-.leaderboard > h1 {
+.leaderboard > h2 {
     margin: 10px 0px 50px;
 }
 
@@ -231,7 +234,7 @@ h1 {
 }
 
 .faq-card {
-    background-color: #0a235b;
+    background-color: #00296B;
     border-radius: 20px;
     padding: 30px;
     color: white;
