@@ -22,7 +22,7 @@ main{
 h1 {
   font-size: 40px;
   text-align: center;
-  margin-bottom: -5px;
+  margin-bottom: 0;
 }
 
 .darkblue {
@@ -230,16 +230,17 @@ h1 {
   margin: auto;
   background-color: rgb(49, 47, 47);
   background-image: 
-    linear-gradient(to right, rgba(245, 245, 245, 0.6) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(245, 245, 245, 0.6) 1px, transparent 1px);
+
+    linear-gradient(to right, whitesmoke 1px, transparent 1px),
+    linear-gradient(to bottom, whitesmoke 1px, transparent 1px);
+
   background-size: calc(100% / 8) calc(100% / 8);
 }
 
 .pieces {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   width: 100%;
-  height: 100%;
 }
 
 .game_grid img {
@@ -265,7 +266,6 @@ h1 {
   #game_layout{
     flex-direction: column;
     width: 100%;
-    margin: 60px 0;
     align-items: center;
     justify-content: center;
     gap: 24px;
@@ -276,27 +276,25 @@ h1 {
     flex-direction: row;
     justify-content: center;
     gap: 10px;
-    width: 98%;
+    width: 95%;
   }
 
   .container {
-    flex: 1 1 0;
-    height: auto;
     padding: 10px;
+    height: auto;
   }
 
   .label {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .value {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   #btn_restart,
   #btn_quit {
     font-size: 10px;
-    flex: 1 1 140px;
     width: auto;
   }
 
@@ -314,24 +312,29 @@ h1 {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 786px) {
   #description {
     width: min(450px, 92%);
   }
 
   #side_info{
-    margin-top: 70px;
     width: 95%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  #game_layout {
-    margin-bottom: 170px;
-  }
-
   .game_grid {
     width: min(800px, 95vw);
+  }
+  .container {
+    height: auto;
+  }
+  .label {
+    font-size: 14px;
+  }
+
+  .value {
+    font-size: 25px;
   }
 }
 
@@ -347,15 +350,15 @@ h1 {
   }
 
   .avatar {
-    font-size: 20px;
+    font-size: 15px;
   }
 
   .player-name {
-    font-size: 20px;
+    font-size: 10px;
   }
 
   .world-score {
-    font-size: 20px;
+    font-size: 10px;
   }
 
   #side_info {
