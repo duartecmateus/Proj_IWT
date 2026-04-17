@@ -4,8 +4,11 @@ Gabriel Lima N62796: HTML e CSS das páginas Home ,History e a Grid da página g
 
 Miguel Moreira N59712: HTML e CSS das páginas Login e Singin, esforço: 33%
 
-Todos: HTML e CSS da página game_window, todos participámos de forma equivalente para o trabalho
+Todos: HTML e CSS da página game_window, todos participámos de forma equivalente para o trabalho. Por questões de tempo não fomos capazes de organizar todos os documentos CSS como queríamos, nomeadamente não fomos capazes de, para cada html, gerar um css único que importa os outros CSS tendo apenas feito isto para o home.
 
-
-Indicações sobre como executar o projeto:
-    Começa por abrir a página home e partir de aí navegue para as outras páginas.
+Navegação no site:
+  Comece por abrir a página "home", sendo que é a página inicial e é onde se pode aceder ao jogo;
+  A página "game_window" apenas é acessível a partir do botão "PLAY NOW!", que se encontra na página "home";
+  A página "sign_up" apenas é acessível a partir do link "Crack open an egg!", que se encontra após a pergunta "Don't have an account?" na página "login";
+  A página "edit_account" apenas é acessível a partir dos botões amarelos "LOGIN" e "SIGN UP", presentes nas páginas "login" e "sign_up", respetivamente;
+  A página "login" pode ser acedida novamente a partir do link "Log in!", que se encontra na página "sign_up";
