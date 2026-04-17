@@ -10,7 +10,6 @@ main{
   align-items: center;
 }
 
-
 #description {
   width: 450px;
   display: flex;
@@ -31,7 +30,7 @@ h1 {
 }
 
 .orange{
-  color: #CC4520;;
+  color: #CC4520;
 }
 
 .white{
@@ -46,14 +45,13 @@ h1 {
 
 #game_layout{
   display: flex;
-  height: 824px;
-  padding: 24px 24px 0 24px;
-  align-items: flex-start;
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
+  padding: 24px 24px 0 24px;
   align-items: center;
   justify-content: center;
   gap: 24px;
+  box-sizing: border-box;
 }
 
 #side_info {
@@ -102,14 +100,14 @@ h1 {
 
 #heat-meter{
   display: flex;
-  width: 252px;
+  width: 100%;
   height: 32px;
   align-items: flex-start;
   gap: 4px;
 }
 
 .heat_bar_seg{
-  width: 33px;
+  flex: 1;
   height: 32px;
   border-radius: 4px;
 }
@@ -128,7 +126,7 @@ h1 {
 }
 
 #counter-container{
-  background: #fff
+  background: #fff;
 }
 
 /* Eggs Scrambled */
@@ -219,30 +217,35 @@ h1 {
 
 /* ÁREA DO JOGO (frigideira) */
 
-
-
-.pieces {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-.game_grid img {
-  width: 100px;
-  height: 100px;
-  display: block;
+.game-board {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .game_grid {
-  width: 800px;
-  height: 800px;
+  width: min(800px, 98vw);
+  aspect-ratio: 1 / 1;
   position: relative;
-
+  margin: auto;
+  background-color: rgb(49, 47, 47);
   background-image: 
     linear-gradient(to right, rgba(245, 245, 245, 0.6) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(245, 245, 245, 0.6) 1px, transparent 1px);
+  background-size: calc(100% / 8) calc(100% / 8);
+}
 
-  background-size: 100px 100px; /* size of each cell*/
-  background-color: rgb(49, 47, 47); /* board color*/
-  margin: auto;
+.pieces {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.game_grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
 }
 
 #Tip_container {
@@ -255,44 +258,17 @@ h1 {
   margin-bottom: 50px;
   border-radius: 16px;
   border: 3px solid #FFD23F;
-  background: rgba(255, 210, 63, 0.30)
-}
-
-@media screen and (max-width: 800px) {
-  .game_grid {
-    width: 98%;
-    height: 98vw;
-    position: relative;
-
-    background-image: 
-      linear-gradient(to right, burlywood 1px, transparent 1px),
-      linear-gradient(to bottom, burlywood 1px, transparent 1px);
-
-    /* This makes the grid cells exactly 1/10th of the screen width */
-    background-size: 12vw 12vw; 
-    
-    background-color: rgb(49, 47, 47);
-    margin: auto;
-  }
-
-  .game_grid img {
-    width: 12vw;
-    height: 12vw;
-    display: block;
-  }
+  background: rgba(255, 210, 63, 0.30);
 }
 
 @media screen and (max-width: 1100px) {
   #game_layout{
-    display: flex;
     flex-direction: column;
-    height: 824px;
     width: 100%;
     margin: 60px 0;
     align-items: center;
     justify-content: center;
     gap: 24px;
-    
   }
 
   #side_info{
@@ -304,7 +280,7 @@ h1 {
   }
 
   .container {
-    flex: 1fr 1fr;
+    flex: 1 1 0;
     height: auto;
     padding: 10px;
   }
@@ -317,9 +293,10 @@ h1 {
     font-size: 25px;
   }
 
-  #btn_restart, #btn_quit {
+  #btn_restart,
+  #btn_quit {
     font-size: 10px;
-    flex: 1fr 1fr 140px;
+    flex: 1 1 140px;
     width: auto;
   }
 
@@ -329,15 +306,19 @@ h1 {
   }
 
   .heat_bar_seg {
-    width: 20%;
+    width: auto;
   }
 
-#tip_container {
+  #Tip_container {
     margin-top: 100px;
   }
 }
 
 @media screen and (max-width: 800px) {
+  #description {
+    width: min(450px, 92%);
+  }
+
   #side_info{
     margin-top: 70px;
     width: 95%;
@@ -348,6 +329,43 @@ h1 {
   #game_layout {
     margin-bottom: 170px;
   }
-  
 
+  .game_grid {
+    width: min(800px, 95vw);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #side_info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .rank-number {
+    font-size: 15px;
+  }
+
+  .avatar {
+    font-size: 20px;
+  }
+
+  .player-name {
+    font-size: 20px;
+  }
+
+  .world-score {
+    font-size: 20px;
+  }
+
+  #side_info {
+    grid-template-columns: 1fr;
+  }
+
+  #Tip_container {
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
 }
