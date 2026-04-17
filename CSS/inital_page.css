@@ -41,71 +41,71 @@ h3 {
 
    /*-----------------Title Section--------------------*/
 
-  .title-content > * {
-    color:whitesmoke;
-  }
+.title-content > * {
+  color:whitesmoke;
+}
 
-  .title-content > h1 {
-    color: #FDC500;
-    font-size: 80px;
-    margin: 10px 10px 0px 10px;
-  }
+.title-content > h1 {
+  color: #FDC500;
+  font-size: 80px;
+  margin: 10px 10px 0px 10px;
+}
 
-  #play_button {
-    background-color:#FDC500 ;
-    padding: 20px 50px;
-    margin-top: 30px;
-    border-radius: 50px;
-    text-decoration: none;
-    color: #00296B;
-    font-size: 25px;
-    font-weight: bold;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-  }
+#play_button {
+  background-color:#FDC500 ;
+  padding: 20px 50px;
+  margin-top: 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #00296B;
+  font-size: 25px;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
 
-  #play_button:hover {
-    background-color: white;
-    color: #FDC500;
-    transform: scale(1.2);
-  }
+#play_button:hover {
+  background-color: white;
+  color: #FDC500;
+  transform: scale(1.2);
+}
 
-    /*-----------------Rules--------------------*/
+  /*-----------------Rules--------------------*/
 
-  .rules-container{
-    display: flex;
-    justify-content: space-around;
-    gap: 40px;
-    width: 90%;
-  }
+.rules-container{
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  width: 90%;
+}
 
-  .rules-card {
-    background-color: white;
-    border: 3px solid rgb(177, 177, 177);
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 10px;
-  }
+.rules-card {
+  background-color: white;
+  border: 3px solid rgb(177, 177, 177);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 10px;
+}
 
-  .rules h3 {
-    color: #00296B; 
-    font-weight: bolder;
-  }
+.rules h3 {
+  color: #00296B; 
+  font-weight: bolder;
+}
 
-  .rules p {
-    color: grey;
-  }
+.rules p {
+  color: grey;
+}
     /*-----------------Video--------------------*/
 
 .video-card {
-    background-color: white;
-    border: 3px solid rgb(177, 177, 177);
-    border-radius: 15px;
-    padding: 40px 20px;
-    width: 90%;
-    box-sizing: border-box; /*meter no body????*/
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: white;
+  border: 3px solid rgb(177, 177, 177);
+  border-radius: 15px;
+  padding: 40px 20px;
+  width: 90%;
+  box-sizing: border-box;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .video-card > * {
@@ -113,111 +113,118 @@ h3 {
 }
 
 .video-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #00296B;
-    padding: 40px 0px;
-    border-radius: 30px;
-    width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #00296B;
+  padding: 40px 40px;
+  border-radius: 30px;
+  width: 80%;
 }
- .video-placeholder > * {
-      color: #FDC500;
-      font-weight: 600;
- }
-  .video-card > cite {
-    color:rgb(177, 177, 177); 
-    font-size: 20px;
-  }
+
+.video-placeholder > video {
+  width: 800px;
+  margin-bottom: 20px ;
+}
+.video-placeholder > h3 {
+  color: #FDC500;
+  font-weight: 600;
+  font-size: 25px;
+  margin-bottom: 0px ;
+}
+.video-card > cite {
+  color:rgb(177, 177, 177); 
+  font-size: 20px;
+}
 
   /*-----------------Egg-Gallery/ Powersss--------------------*/
   
-  .egg-grid, .power-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 40px;
-    width: 95%;
-  }
+.egg-grid, .power-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 40px;
+  width: 95%;
+}
 
-  .game-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    border: 3px solid #FDC500;
-    border-radius: 15px;
-    padding: 10px;
-  }
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 3px solid #FDC500;
+  border-radius: 15px;
+  padding: 10px;
+}
 
-  .emoji {
-    font-size: 50px;
-  }
+.emoji {
+  font-size: 50px;
+}
   /*-----------------Media_Types--------------------*/
 
   /*Tablets*/
 @media screen and (max-width:1024px) {
-    .rules-container {
-      width: 80%;
-      flex-direction: column;
-      gap:10px;
-    }
+  .rules-container {
+    width: 80%;
+    flex-direction: column;
+    gap:10px;
+  }
 
-    .egg-grid, .power-grid{
-      grid-template-columns: 1fr 1fr;
-    }
+  .egg-grid, .power-grid{
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
  /* Smartphones */
 @media screen and (max-width:768px) {
-   .title-content h1 {
-      font-size: 60px;
-    }
+  .title-content h1 {
+    font-size: 60px;
+  }
 
-    .title-content > * {
-      font-size: 15px;
-    }
+  .title-content > * {
+    font-size: 15px;
+  }
 
-    .cards-container {
-      flex-direction: column;
-      gap:0px;
-      width: 80%;
-    }
+  .cards-container {
+    flex-direction: column;
+    gap:0px;
+    width: 80%;
+  }
 
-    .video-title {
-      text-align: center;
-    }
+  .video-title {
+    text-align: center;
+  }
 
-    .egg-grid, .power-grid{
-      width: 85%;
-      grid-template-columns: 1fr;
-      grid-gap: 20px;
-    }
+  .egg-grid, .power-grid{
+    width: 85%;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
 
-    .game-card, .game-card >*{
-      padding: 3px;
-      margin: 0px;
-    }
+  .game-card, .game-card >*{
+    padding: 3px;
+    margin: 0px;
+  }
 
-    .emoji {
-      font-size: 40px;
+  .emoji {
+    font-size: 40px;
   }
 }
 
 /* Small Smartphones */
 @media (max-width: 400px) {
   .title-content h1 {
-      font-size: 45px;
-    }
+    font-size: 45px;
+  }
 
-    .title-content > * {
-      font-size: 10px;
-    }
+  .title-content > * {
+    font-size: 10px;
+  }
 
-    #play_button {
-      font-size: 15px;
-    }
+  #play_button {
+    font-size: 15px;
+  }
 
-    .egg-gallery h2 {
-      text-align: center;
-    }
+  .egg-gallery h2 {
+    text-align: center;
+  }
 }
