@@ -146,3 +146,19 @@ footer {
   top: 30px;
   bottom: 0px;
 }
+
+@media screen and (max-width: 500px) {
+  #sign_up, #Tip_container, #description{
+    width: min(92%, calc(100% - 50px));
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .avatar_grid {
+    grid-template-columns: 1fr 1fr 1fr
+  }
+}

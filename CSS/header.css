@@ -70,5 +70,13 @@
 }
 
 
+@media screen and (max-width: 400px) {
+  header {
+    font-size: small;
+  }
+  header a{
+    padding: 5px 3px;
+  }
+}
 
 

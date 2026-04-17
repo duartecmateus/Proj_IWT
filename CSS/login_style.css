@@ -25,7 +25,7 @@ h1 {
 }
 
 h2 {
-    margin: 0px;
+  margin: 0px;
 }
 
 .darkblue {
@@ -120,4 +120,15 @@ footer {
   position: relative;
   top: 30px;
   bottom: 0px;
+}
+
+@media screen and (max-width: 500px) {
+  #login, #Tip_container, #description{
+    width: min(92%, calc(100% - 50px));
+  }
+
+  #log_btn {
+    height: 40px;
+    font-size: large;
+  }
 }
