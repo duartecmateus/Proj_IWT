@@ -176,7 +176,7 @@ h3 {
 
     .title-content > * {
       font-size: 15px;
-  }
+    }
 
     .cards-container {
       flex-direction: column;
@@ -202,5 +202,25 @@ h3 {
     .emoji {
       font-size: 40px;
   }
+}
+
+/* Small Smartphones */
+@media (max-width: 800px) {
+  .title-content h1 {
+      font-size: 45px;
+    }
+
+    .title-content > * {
+      font-size: 10px;
+    }
+
+    #play_button {
+      font-size: 15px;
+    }
+
+    .egg-gallery h2 {
+      text-align: center;
+    }
+
 
 }

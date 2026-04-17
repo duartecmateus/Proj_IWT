@@ -277,4 +277,21 @@ h1 {
     }
 }
 
+/* Small Smartphones */
+@media (max-width: 400px) {
+    .rank-number {
+        font-size: 15px;
+    }
 
+    .avatar {
+        font-size: 20px;
+    }
+
+    .player-name {
+        font-size: 20px;
+    }
+
+    .world-score {
+        font-size: 20px;
+    }
+}
