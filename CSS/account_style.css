@@ -5,14 +5,13 @@
 body {
   margin: 0;
   background-color: #F4E4C1;
-  overflow-x: hidden;
 }
 
 /* Shared visible width */
 .profile_box,
 .stats_box,
 #logout_button {
-  width: min(760px, calc(100% - 40px));
+  width: min(768px, calc(100% - 40px)); /* Width is the smaller of 768px or 100% minus 40px */
 }
 
 /* Edit profile section */
@@ -63,11 +62,11 @@ body {
   height: 50px;
   border: 3px solid #ecd7a6;
   border-radius: 18px;
-  background: transparent;
   padding: 0 14px;
   font-size: 0.95rem;
   color: #12397f;
   outline: none;
+  font: inherit;
 }
 
 .form-input:focus {
@@ -89,12 +88,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  cursor: pointer; /* Shows the hand cursor when hovering */
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease; /* Animates transform, border color, and background changes over 0.2s */
 }
 
 .avatar_option:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Moves the element up by 2px*/
 }
 
 .avatar_option.selected {
@@ -197,7 +196,7 @@ body {
   background: #fae08a;
 }
 
-/* Responsive */
+/* For phones or smaller screens */
 @media (max-width: 768px) {
   .profile_box,
   .stats_box,
