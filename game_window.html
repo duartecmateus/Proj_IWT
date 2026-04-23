@@ -16,7 +16,7 @@
         <p> SCRAMBLED</p>
         <nav>
             <a href="./home.html">HOME</a>
-             <a href="./history.html">HISTORY</a>
+            <a href="./history.html">HISTORY</a>
             <a href="./login.html">LOGIN</a>
         </nav>
     </header>
@@ -34,6 +34,7 @@
                     <p class="label">⏱ TIME</p>
                     <p class="value">3:14</p>
                 </div>
+
                 <div id="heat-container" class="container">
                     <div class="bold white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -50,10 +51,12 @@
                     </div>
                     <span class="white label"> Don't overcook!</span>
                 </div>
+
                 <div id="score-container" class="container darkblue bold">
                     <p class="label">SCORE</p>
                     <p class="value" id="score">3,450</p>
                 </div>
+
                 <div id="eggs_card" class="container">
                     <p class="darkblue bold label">EGGS SCRAMBLED</p>
                     <div class="eggs_count">
@@ -65,7 +68,8 @@
                     </div>
                     <div class="hint" id="eggsHint">33 eggs to go!</div>
                 </div>
-                <button id="btn_restart" onclick="">↺ RESTART</button>
+
+                <button id="btn_restart" onclick="window.location.href='./game_window.html'">↺ RESTART</button>
                 <button id="btn_quit" onclick="window.location.href='./home.html'">✕ QUIT GAME</button>
             </div>
 
@@ -92,7 +96,7 @@
             </section>
 
             <section class="background-music">
-                <audio controls aria-label="Background-Music">
+                <audio controls autoplay aria-label="Background-Music">
                     <source src="Audio/ikoliks_aj-jazz-lounge-elevator-music-332339.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
