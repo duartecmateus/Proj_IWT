@@ -1,0 +1,226 @@
+/* Grupo: 27, Número: 62796, Nome: Gabriel Lima, PL: 21 */
+/* Grupo: 27, Número: 59712, Nome: Miguel Moreira, PL: 21 */
+/* Grupo: 27, Número: 62019, Nome: Duarte Matheus, PL: 21  */
+
+/* ── CÉLULAS DA GRELHA ───────────────────────────── */
+
+.pieces {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+/* Cada célula ocupa 1 quadrado da grelha */
+.cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.1s ease;
+}
+
+.cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;          /* o clique vai para o .cell */
+  user-select: none;
+  border-radius: 4px;
+}
+
+/* ── HOVER ───────────────────────────────────────── */
+.cell:hover img {
+  transform: scale(1.08);
+  transition: transform 0.15s ease;
+  filter: brightness(1.1);
+}
+
+/* ── SELECÇÃO ────────────────────────────────────── */
+.cell.selected {
+  z-index: 10;
+}
+
+.cell.selected img {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 6px #FFD23F) brightness(1.15);
+  outline: 3px solid #FFD23F;
+  outline-offset: 2px;
+  border-radius: 6px;
+  animation: pulse-selected 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-selected {
+  from { filter: drop-shadow(0 0 4px #FFD23F) brightness(1.1); }
+  to   { filter: drop-shadow(0 0 12px #FFD23F) brightness(1.25); }
+}
+
+/* ── TROCA (SWAP) ────────────────────────────────── */
+.cell.swap-active img {
+  transition: transform 0.2s ease;
+  transform: scale(0.9);
+}
+
+/* Troca inválida — bounce de volta */
+.cell.swap-bounce img {
+  animation: bounce-back 0.3s ease;
+}
+
+@keyframes bounce-back {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(0.85) rotate(-5deg); }
+  60%  { transform: scale(1.05) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* ── MATCH NORMAL (3 em linha) ───────────────────── */
+.cell.matched {
+  animation: crack-egg 0.45s ease forwards;
+}
+
+@keyframes crack-egg {
+  0%   { transform: scale(1);    opacity: 1; }
+  30%  { transform: scale(1.25); opacity: 0.9; filter: brightness(1.5) saturate(1.5); }
+  70%  { transform: scale(0.6);  opacity: 0.5; }
+  100% { transform: scale(0);    opacity: 0; }
+}
+
+/* ── MATCH BÓNUS (4+ em linha) ───────────────────── */
+.cell.matched-bonus {
+  animation: crack-egg-bonus 0.45s ease forwards;
+}
+
+@keyframes crack-egg-bonus {
+  0%   { transform: scale(1);    opacity: 1; filter: none; }
+  20%  { transform: scale(1.4);  opacity: 1; filter: brightness(2) saturate(2) hue-rotate(30deg); }
+  50%  { transform: scale(1.2) rotate(15deg); filter: brightness(1.8) saturate(3); }
+  80%  { transform: scale(0.5);  opacity: 0.4; }
+  100% { transform: scale(0);    opacity: 0; }
+}
+
+/* ── NOVAS PEÇAS (queda) ─────────────────────────── */
+.cell.fall-in img {
+  animation: fall-in 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes fall-in {
+  from { transform: translateY(-40px) scale(0.7); opacity: 0; }
+  to   { transform: translateY(0)     scale(1);   opacity: 1; }
+}
+
+/* ── ECRÃ FINAL (OVERLAY) ────────────────────────── */
+#game-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 40, 0.72);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#game-modal {
+  background: #fff;
+  border-radius: 24px;
+  border: 4px solid #00296B;
+  padding: 40px 48px;
+  text-align: center;
+  max-width: 360px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  animation: modal-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modal-pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.modal-emoji {
+  font-size: 52px;
+  margin: 0 0 8px;
+}
+
+#game-modal h2 {
+  font-size: 28px;
+  font-weight: 900;
+  color: darkblue;
+  letter-spacing: 0.06em;
+  margin: 0 0 16px;
+}
+
+.modal-score,
+.modal-time {
+  font-size: 16px;
+  color: #444;
+  margin: 4px 0;
+}
+
+.modal-score strong,
+.modal-time strong {
+  color: #CC4520;
+  font-weight: 800;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}
+
+.modal-buttons button {
+  background: #1a2560;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.modal-buttons button:hover {
+  background: #263080;
+}
+
+.modal-buttons button.secondary {
+  background: #fff;
+  color: #1a2560;
+  border: 2px solid #c8c0f0;
+}
+
+.modal-buttons button.secondary:hover {
+  background: #f0eeff;
+}
+
+/* ── PARTÍCULAS DE BÓNUS ─────────────────────────── */
+.bonus-particle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 22px;
+  font-weight: 900;
+  color: #FFD23F;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  z-index: 8888;
+  animation: float-up 0.9s ease forwards;
+}
+
+@keyframes float-up {
+  0%   { transform: translateY(0)   scale(1);    opacity: 1; }
+  100% { transform: translateY(-80px) scale(1.4); opacity: 0; }
+}
+

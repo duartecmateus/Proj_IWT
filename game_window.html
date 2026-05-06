@@ -10,6 +10,9 @@
     <title> GAME - SCRAMBLED </title>
     <link rel="stylesheet" href="CSS/general.css">
     <link rel="stylesheet" href="CSS/Game_style.css">
+    <script src="JavaScript/game.js"></script>
+    <link rel="stylesheet" href="CSS/game_animations.css">
+    
 </head>
 <body>
     <header>
@@ -32,7 +35,7 @@
             <div id="side_info">
                 <div id="timer-container" class="container bold darkblue">
                     <p class="label">⏱ TIME</p>
-                    <p class="value">3:14</p>
+                    <p class="value">0:00</p>
                 </div>
 
                 <div id="heat-container" class="container">
@@ -43,10 +46,10 @@
                         <span class="label">HEAT LEVEL</span>
                     </div>
                     <div id="heat-meter">
-                        <span class="heat_bar_seg on"></span>
-                        <span class="heat_bar_seg on"></span>
-                        <span class="heat_bar_seg on"></span>
-                        <span class="heat_bar_seg on"></span>
+                        <span class="heat_bar_seg off"></span>
+                        <span class="heat_bar_seg off"></span>
+                        <span class="heat_bar_seg off"></span>
+                        <span class="heat_bar_seg off"></span>
                         <span class="heat_bar_seg off"></span>
                     </div>
                     <span class="white label"> Don't overcook!</span>
@@ -54,19 +57,19 @@
 
                 <div id="score-container" class="container darkblue bold">
                     <p class="label">SCORE</p>
-                    <p class="value" id="score">3,450</p>
+                    <p class="value" id="score">0</p>
                 </div>
 
                 <div id="eggs_card" class="container">
                     <p class="darkblue bold label">EGGS SCRAMBLED</p>
                     <div class="eggs_count">
-                        <span class="big" id="eggsCount">67</span>
+                        <span class="big" id="eggsCount">0</span>
                         <span class="total">/ 100</span>
                     </div>
                     <div class="eggs_bar_bg">
                         <div class="eggs_bar_fill" id="eggsBar"></div>
                     </div>
-                    <div class="hint" id="eggsHint">33 eggs to go!</div>
+                    <div class="hint" id="eggsHint">100 eggs to go!</div>
                 </div>
 
                 <button id="btn_restart" onclick="window.location.href='./game_window.html'">↺ RESTART</button>
@@ -76,13 +79,6 @@
             <div class="game-board">
                 <div class="game_grid">
                     <div class="pieces">
-                        <img src="Imagens/ovo-vermelho.png" alt="Sprite1"/>
-                        <img src="Imagens/ovo-estrelado.png" alt="Sprite2"/>
-                        <img src="Imagens/ovo-dia-dos-muertos.png" alt="Sprite3"/>
-                        <img src="Imagens/ovo-amarelo.png" alt="Sprite4"/>
-                        <img src="Imagens/cat_egg.jpg" alt="Sprite5"/>
-                        <img src="Imagens/humpty_dumpty.jpg" alt="Sprite6"/>
-                        <img src="Imagens/togepie.jpg" alt="Sprite7"/>  
                     </div>
                 </div>
             </div>
