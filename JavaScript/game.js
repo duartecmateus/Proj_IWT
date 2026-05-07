@@ -3,6 +3,9 @@
 /* Grupo: 27, Número: 62019, Nome: Duarte Matheus, PL: 21  */
 
 /* ── CONFIGURAÇÃO ─────────────────────────────────── */
+
+import { Grid} from './comportement.js';
+
 const GRID_SIZE    = 8;       // dimensão do tabuleiro (8×8)
 const MIN_MATCH    = 3;       // mínimo de peças para fazer match
 const TOTAL_EGGS   = 100;     // objetivo total de ovos
