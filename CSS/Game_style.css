@@ -164,7 +164,7 @@ h1 {
 
 .eggs_bar_fill {
   height: 100%;
-  width: 67%;
+  width: 0%;
   background: #f0a800;
   border-radius: 99px;
   transition: width 0.3s ease;
