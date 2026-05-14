@@ -18,7 +18,7 @@ export function randomEgg() {
    EGGS — imagens dos ovos
    ════════════════════════════════════════════════════ */
 
-export function Eggs()
+export function Eggs() //tirar os url
 {
     this.EGG_IMAGES = [
         'Imagens/ovo-vermelho.png',
