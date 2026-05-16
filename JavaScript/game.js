@@ -143,6 +143,74 @@ export function Matcher(gridRef)
             bonus: bonusCells_arr.map(m => ({ row: Number(m.split(',')[0]), col: Number(m.split(',')[1]) })),
         };
     }
+
+    /**
+     * Checks every adjacent pair of cells and returns true if swapping
+     * any one of them would produce a match of MIN_MATCH or more eggs.
+     */
+    this.hasPossibleMove = function() {
+        const grid = this.gridRef.grid;
+
+        const swap = (r1, c1, r2, c2) => {  //devo dar como parametro a classe swap para depois usar o swap ou posso ter o duplicado?
+            const t = grid[r1][c1];
+            grid[r1][c1] = grid[r2][c2];
+            grid[r2][c2] = t;
+        };
+
+        for (let r = 0; r < GRID_SIZE; r++) {
+            for (let c = 0; c < GRID_SIZE; c++) {
+
+                // Try swap with right neighbour
+                if (c + 1 < GRID_SIZE) {
+                    swap(r, c, r, c + 1);
+                    const found = this._hasMatch();
+                    swap(r, c + 1, r, c); // restore
+                    if (found) return true;
+                }
+
+                // Try swap with bottom neighbour
+                if (r + 1 < GRID_SIZE) {
+                    swap(r, c, r + 1, c);
+                    const found = this._hasMatch();
+                    swap(r + 1, c, r, c); // restore
+                    if (found) return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Fast scan — returns true as soon as any run of MIN_MATCH
+     * identical (non-null) eggs is found horizontally or vertically.
+     * Used by hasPossibleMove() to test candidate swaps cheaply.
+     */
+    this._hasMatch = function() {
+        const grid = this.gridRef.grid;
+
+        // Horizontal check
+        for (let r = 0; r < GRID_SIZE; r++) {
+            for (let c = 0; c <= GRID_SIZE - MIN_MATCH; c++) {
+                const type = grid[r][c];
+                if (type === null) continue;
+                if (type === grid[r][c + 1] && type === grid[r][c + 2])
+                    return true;
+            }
+        }
+
+        // Vertical check
+        for (let c = 0; c < GRID_SIZE; c++) {
+            for (let r = 0; r <= GRID_SIZE - MIN_MATCH; r++) {
+                const type = grid[r][c];
+                if (type === null) continue;
+                if (type === grid[r + 1][c] && type === grid[r + 2][c])
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 /* ════════════════════════════════════════════════════
@@ -217,3 +285,5 @@ export function Score()
         this.eggsScrambled = 0;
     }
 }
+
+

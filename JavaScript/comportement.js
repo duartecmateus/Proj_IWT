@@ -192,6 +192,7 @@ function processMatches(matches) {
       } else {
         isAnimating = false;
         checkGameOver();
+        checkPossibleMoves();
       }
     }, 350);
 
@@ -292,6 +293,44 @@ function checkGameOver() {
     clearInterval(timerInterval);
     showEndScreen(true);
   }
+}
+
+/* ════════════════════════════════════════════════════
+   DEADLOCK — sem jogadas possíveis
+   ════════════════════════════════════════════════════ */
+
+function checkPossibleMoves() {
+  if (gameOver) return;                         // game already ended — nothing to do
+  if (matcher_classe.hasPossibleMove()) return; // at least one valid swap exists
+
+  // No moves left — notify the player and rebuild the grid
+  showNoMovesNotice(() => {
+    buildGrid();
+    renderGrid();
+  });
+}
+
+/**
+ * Shows a brief "No moves — reshuffling!" banner, then calls `onDone`.
+ * The banner auto-removes itself after the animation so it never blocks play.
+ */
+function showNoMovesNotice(onDone) {
+  const notice = document.createElement('div');
+  notice.id = 'no-moves-notice';
+  notice.textContent = 'No moves left — reshuffling!';
+  document.body.appendChild(notice);
+
+  // Force reflow so the CSS transition fires
+  void notice.offsetWidth;
+  notice.classList.add('visible');
+
+  setTimeout(() => {
+    notice.classList.remove('visible');
+    setTimeout(() => {
+      notice.remove();
+      onDone();
+    }, 400); // wait for fade-out transition
+  }, 1800);  // banner stays visible for 1.8 s
 }
 
 function showEndScreen(won) {
