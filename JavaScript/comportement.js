@@ -7,7 +7,7 @@
 import { Eggs, randomEgg, Grid, Swap, Matcher, Gravity, Score } from './game.js';
 
 const GRID_SIZE  = 8; 
-const TOTAL_EGGS = 100; //meter na funcao eggs esses 2 parametros 
+const TOTAL_EGGS = 100;
 
 /* ── ESTADO DO JOGO ───────────────────────────────── */
 
@@ -15,18 +15,16 @@ let grid_classe  = new Grid();
 let eggs_classe  = new Eggs();
 const EGG_IMAGES = eggs_classe.EGG_IMAGES;
 
-// gridRef is a shared wrapper so Swap/Matcher/Gravity all read the same live grid
-let gridRef       = { grid: grid_classe.grid };
-let swap_classe   = new Swap(gridRef);
+let gridRef        = { grid: grid_classe.grid };
+let swap_classe    = new Swap(gridRef);
 let matcher_classe = new Matcher(gridRef);
 let gravity_classe = new Gravity(gridRef);
-let score_classe  = new Score();
+let score_classe   = new Score();
 
 let selected    = null;
 let isAnimating = false;
 let gameOver    = false;
 
-// Referências da side_info
 let piecesDiv, scoreEl, eggsCountEl, eggsBarEl, eggsHintEl;
 
 /* ════════════════════════════════════════════════════
@@ -57,7 +55,6 @@ function buildGrid() {
   gridRef.grid = grid_classe.grid;
 }
 
-/* Re-desenha toda a grelha no DOM */
 function renderGrid() {
   piecesDiv.innerHTML = '';
 
@@ -111,8 +108,6 @@ function handleCellClick(row, col) {
   }
 }
 
-//Secondaries functions for handleCellClick()
-//---------------------------------------------//
 function selectCell(row, col) {
   selected = { row, col };
   const cell = piecesDiv.querySelector(`[data-row="${row}"][data-col="${col}"]`);
@@ -132,8 +127,7 @@ function clearSelection() {
 function attemptSwap(r1, c1, r2, c2) {
   isAnimating = true;
 
-  animateSwap(r1, c1, r2, c2, () => 
-  {
+  animateSwap(r1, c1, r2, c2, () => {
     swap_classe.swapInGrid(r1, c1, r2, c2);
 
     const matches = matcher_classe.findAllMatches();
@@ -141,11 +135,8 @@ function attemptSwap(r1, c1, r2, c2) {
 
     if (matches.cells.length > 0) {
       processMatches(matches);
-    } 
-    else 
-    {
-      animateSwap(r2, c2, r1, c1, () => 
-      {
+    } else {
+      animateSwap(r2, c2, r1, c1, () => {
         swap_classe.swapInGrid(r2, c2, r1, c1);
         renderGrid();
         isAnimating = false;
@@ -153,7 +144,6 @@ function attemptSwap(r1, c1, r2, c2) {
     }
   });
 }
-//---------------------------------------------//
 
 /* ════════════════════════════════════════════════════
    PROCESSAMENTO DE MATCHES (cascata)
@@ -161,7 +151,7 @@ function attemptSwap(r1, c1, r2, c2) {
 
 function processMatches(matches) {
   const cells = matches.cells;
-  const bonus  = matches.bonus;
+  const bonus = matches.bonus;
   isAnimating = true;
 
   cells.forEach(({ row, col }) => {
@@ -250,7 +240,7 @@ let timerSeconds  = 0;
 let timerInterval = null;
 
 function startTimer() {
-  timerSeconds  = 0;
+  timerSeconds = 0;
   timerInterval = setInterval(() => {
     timerSeconds++;
     updateTimerDisplay();
@@ -258,29 +248,81 @@ function startTimer() {
 }
 
 function updateTimerDisplay() {
-  const min     = Math.floor(timerSeconds / 60).toString().padStart(1, '0');
-  const sec     = (timerSeconds % 60).toString().padStart(2, '0');
+  const min = Math.floor(timerSeconds / 60).toString().padStart(1, '0');
+  const sec = (timerSeconds % 60).toString().padStart(2, '0');
   const timerEl = document.querySelector('#timer-container .value');
   if (timerEl) timerEl.textContent = `${min}:${sec}`;
 }
 
 function updateHUD() {
-  if (scoreEl)     scoreEl.textContent     = score_classe.score.toLocaleString('pt-PT');
+  if (scoreEl) scoreEl.textContent = score_classe.score.toLocaleString('pt-PT');
   if (eggsCountEl) eggsCountEl.textContent = score_classe.eggsScrambled;
-  if (eggsBarEl)   eggsBarEl.style.width   = `${(score_classe.eggsScrambled / TOTAL_EGGS) * 100}%`;
+  if (eggsBarEl) eggsBarEl.style.width = `${(score_classe.eggsScrambled / TOTAL_EGGS) * 100}%`;
+
   if (eggsHintEl) {
     const remaining = TOTAL_EGGS - score_classe.eggsScrambled;
     eggsHintEl.textContent = remaining > 0 ? `${remaining} eggs to go!` : '🎉 All scrambled!';
   }
+
   updateHeatMeter();
 }
 
 function updateHeatMeter() {
-  const level    = Math.min(5, Math.floor(score_classe.score / 1000));
+  const level = Math.min(5, Math.floor(score_classe.score / 1000));
   const segments = document.querySelectorAll('.heat_bar_seg');
   segments.forEach((seg, i) => {
     seg.className = 'heat_bar_seg ' + (i < level ? 'on' : 'off');
   });
+}
+
+/* ════════════════════════════════════════════════════
+   PLAYER STATS SAVE
+   ════════════════════════════════════════════════════ */
+
+function updateLocalRanks(users) {
+  const sortedUsers = [...users].sort((a, b) => {
+    const scoreA = Number(a.stats?.highScore || 0);
+    const scoreB = Number(b.stats?.highScore || 0);
+    return scoreB - scoreA;
+  });
+
+  sortedUsers.forEach((user, index) => {
+    if (!user.stats) user.stats = {};
+    user.stats.worldRank = index + 1;
+  });
+}
+
+function saveGameStats() {
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (!loggedInUser) return;
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  const userIndex = users.findIndex(user => user.email === loggedInUser.email);
+
+  if (userIndex === -1) return;
+
+  if (!users[userIndex].stats) {
+    users[userIndex].stats = {
+      worldRank: 1,
+      highScore: 0,
+      gamesPlayed: 0,
+      timePlayedSeconds: 0
+    };
+  }
+
+  const currentStats = users[userIndex].stats;
+
+  currentStats.gamesPlayed = Number(currentStats.gamesPlayed || 0) + 1;
+  currentStats.timePlayedSeconds = Number(currentStats.timePlayedSeconds || 0) + timerSeconds;
+  currentStats.highScore = Math.max(
+    Number(currentStats.highScore || 0),
+    score_classe.score
+  );
+
+  updateLocalRanks(users);
+
+  localStorage.setItem('users', JSON.stringify(users));
+  localStorage.setItem('loggedInUser', JSON.stringify(users[userIndex]));
 }
 
 /* ════════════════════════════════════════════════════
@@ -291,6 +333,7 @@ function checkGameOver() {
   if (score_classe.isComplete()) {
     gameOver = true;
     clearInterval(timerInterval);
+    saveGameStats();
     showEndScreen(true);
   }
 }
@@ -300,27 +343,21 @@ function checkGameOver() {
    ════════════════════════════════════════════════════ */
 
 function checkPossibleMoves() {
-  if (gameOver) return;                         // game already ended — nothing to do
-  if (matcher_classe.hasPossibleMove()) return; // at least one valid swap exists
+  if (gameOver) return;
+  if (matcher_classe.hasPossibleMove()) return;
 
-  // No moves left — notify the player and rebuild the grid
   showNoMovesNotice(() => {
     buildGrid();
     renderGrid();
   });
 }
 
-/**
- * Shows a brief "No moves — reshuffling!" banner, then calls `onDone`.
- * The banner auto-removes itself after the animation so it never blocks play.
- */
 function showNoMovesNotice(onDone) {
   const notice = document.createElement('div');
   notice.id = 'no-moves-notice';
   notice.textContent = 'No moves left — reshuffling!';
   document.body.appendChild(notice);
 
-  // Force reflow so the CSS transition fires
   void notice.offsetWidth;
   notice.classList.add('visible');
 
@@ -329,8 +366,8 @@ function showNoMovesNotice(onDone) {
     setTimeout(() => {
       notice.remove();
       onDone();
-    }, 400); // wait for fade-out transition
-  }, 1800);  // banner stays visible for 1.8 s
+    }, 400);
+  }, 1800);
 }
 
 function showEndScreen(won) {
@@ -365,9 +402,9 @@ function restartGame() {
   if (overlay) overlay.remove();
 
   score_classe.reset();
-  selected    = null;
+  selected = null;
   isAnimating = false;
-  gameOver    = false;
+  gameOver = false;
 
   clearInterval(timerInterval);
   updateHUD();

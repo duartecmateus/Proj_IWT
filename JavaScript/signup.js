@@ -30,22 +30,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = email.split("@")[0];
 
         const newUser = {
-            username: username,
-            email: email,
-            password: password,
-            birthdate: birthdate,
-            avatar: avatar,
+            username,
+            email,
+            password,
+            birthdate,
+            avatar,
             stats: {
-                worldRank: "#847",
-                highScore: "0",
-                gamesPlayed: "0",
-                timePlayed: "0h 0m"
+                worldRank: 1,
+                highScore: 0,
+                gamesPlayed: 0,
+                timePlayedSeconds: 0
             }
         };
 
         users.push(newUser);
+
+        // simple local ranking
+        users.sort((a, b) => (b.stats?.highScore || 0) - (a.stats?.highScore || 0));
+        users.forEach((user, index) => {
+            if (!user.stats) user.stats = {};
+            user.stats.worldRank = index + 1;
+        });
+
+        const savedUser = users.find(user => user.email === email);
+
         localStorage.setItem("users", JSON.stringify(users));
-        localStorage.setItem("loggedInUser", JSON.stringify(newUser));
+        localStorage.setItem("loggedInUser", JSON.stringify(savedUser));
 
         alert("Account created successfully!");
         window.location.href = "./edit_account.html";

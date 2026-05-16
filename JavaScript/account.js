@@ -1,5 +1,12 @@
 "use strict";
 
+function formatTimePlayed(totalSeconds) {
+    const safeSeconds = Number(totalSeconds || 0);
+    const hours = Math.floor(safeSeconds / 3600);
+    const minutes = Math.floor((safeSeconds % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
@@ -26,12 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     usernameInput.value = loggedInUser.username || "";
 
-    if (loggedInUser.stats) {
-        if (worldRank) worldRank.textContent = loggedInUser.stats.worldRank || "#847";
-        if (highScore) highScore.textContent = loggedInUser.stats.highScore || "0";
-        if (gamesPlayed) gamesPlayed.textContent = loggedInUser.stats.gamesPlayed || "0";
-        if (timePlayed) timePlayed.textContent = loggedInUser.stats.timePlayed || "0h 0m";
-    }
+    const stats = loggedInUser.stats || {
+        worldRank: 1,
+        highScore: 0,
+        gamesPlayed: 0,
+        timePlayedSeconds: 0
+    };
+
+    if (worldRank) worldRank.textContent = `#${Number(stats.worldRank || 1)}`;
+    if (highScore) highScore.textContent = Number(stats.highScore || 0).toLocaleString("pt-PT");
+    if (gamesPlayed) gamesPlayed.textContent = Number(stats.gamesPlayed || 0);
+    if (timePlayed) timePlayed.textContent = formatTimePlayed(stats.timePlayedSeconds || 0);
 
     avatarButtons.forEach(button => {
         if (button.textContent.trim() === selectedAvatar) {

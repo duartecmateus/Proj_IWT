@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ACCOUNT - SCRAMBLED</title>
+    <title> ACCOUNT - SCRAMBLED </title>
     <link rel="stylesheet" href="CSS/general.css">
     <link rel="stylesheet" href="CSS/account_style.css">
     <script src="JavaScript/nav_user.js" defer></script>
@@ -14,91 +14,97 @@
 </head>
 <body>
 
- <header>
-      <p> SCRAMBLED</p>
-      <nav>
-          <a href="./home.html">HOME</a>
-          <a href="./history.html">HISTORY</a>
-          <a href="./login.html" id="nav-login-link">LOGIN</a>
-      </nav>
-  </header>
+    <header>
+        <p> SCRAMBLED</p>
+        <nav>
+            <a href="./home.html">HOME</a>
+            <a href="./history.html">HISTORY</a>
+            <a href="./login.html" id="nav-login-link">LOGIN</a>
+        </nav>
+    </header>
 
-  <section class="edit_profile_box">
-      <div class="profile_box">
-        <h1 class="profile_title">EDIT YOUR PROFILE</h1>
-        <form class="profile-form" id="profile-form">
-          <div class="form_group">
-            <label class="form_label" for="username">USERNAME</label>
-            <input
-              type="text"
-              id="username"
-              class="form-input"
-              value="EGGSLAYER3000"
-            />
-          </div>
-          <div class="form_group">
-            <p class="form_label">CHOOSE NEW AVATAR</p>
-            <div class="avatar_grid">
-              <button type="button" class="avatar_option selected" aria-label="Fried-Egg">🍳</button>
-              <button type="button" class="avatar_option" aria-label="Soup">🥘</button>
-              <button type="button" class="avatar_option" aria-label="Egg">🥚</button>
-              <button type="button" class="avatar_option" aria-label="Swan">🦢</button>
-              <button type="button" class="avatar_option" aria-label="Little-Egg">🐣</button>
-              <button type="button" class="avatar_option" aria-label="Mushroom">🍄</button>
-              <button type="button" class="avatar_option" aria-label="Italia-Flag">🇲🇽</button>
-              <button type="button" class="avatar_option" aria-label="Ninja">🥷</button>
-              <button type="button" class="avatar_option" aria-label="Grand-Ma">👵</button>
-              <button type="button" class="avatar_option" aria-label="Duck">🦤</button>
-              <button type="button" class="avatar_option"aria-label="Disco-Ball">🪩</button>
-            </div>
-          </div>
-          <div class="button_row">
-            <button type="submit" class="btn btn_save">✓ SAVE CHANGES</button>
-            <button type="button" class="btn btn_cancel" id="cancel-button">✕ CANCEL</button>
-          </div>
-        </form>
-      </div>
+    <section class="edit_profile_box">
+        <div class="profile_box">
+            <h1 class="profile_title">EDIT YOUR PROFILE</h1>
+
+            <form class="profile-form" id="profile-form">
+                <div class="form_group">
+                    <label class="form_label" for="username">USERNAME</label>
+                    <input
+                        type="text"
+                        id="username"
+                        class="form-input"
+                        value=""
+                    />
+                </div>
+
+                <div class="form_group">
+                    <p class="form_label">CHOOSE NEW AVATAR</p>
+                    <div class="avatar_grid">
+                        <button type="button" class="avatar_option selected" aria-label="Fried-Egg">🍳</button>
+                        <button type="button" class="avatar_option" aria-label="Soup">🥘</button>
+                        <button type="button" class="avatar_option" aria-label="Egg">🥚</button>
+                        <button type="button" class="avatar_option" aria-label="Swan">🦢</button>
+                        <button type="button" class="avatar_option" aria-label="Little-Egg">🐣</button>
+                        <button type="button" class="avatar_option" aria-label="Mushroom">🍄</button>
+                        <button type="button" class="avatar_option" aria-label="Italia-Flag">🇲🇽</button>
+                        <button type="button" class="avatar_option" aria-label="Ninja">🥷</button>
+                        <button type="button" class="avatar_option" aria-label="Grand-Ma">👵</button>
+                        <button type="button" class="avatar_option" aria-label="Duck">🦤</button>
+                        <button type="button" class="avatar_option" aria-label="Disco-Ball">🪩</button>
+                    </div>
+                </div>
+
+                <div class="button_row">
+                    <button type="submit" class="btn btn_save">✓ SAVE CHANGES</button>
+                    <button type="button" class="btn btn_cancel" id="cancel-button">✕ CANCEL</button>
+                </div>
+            </form>
+        </div>
     </section>
 
- <section class="profile-stats">
-  <div class="stats_box">
-      <h3 class="title">YOUR STATS</h3>
-      <div class="stats-grid">
-        <div class="tile">
-          <div>
-            <div class="label">World Rank</div>
-            <div class="value" id="world-rank">#847</div>
-          </div>
-        </div>
-        <div class="tile">
-          <div>
-            <div class="label">High Score</div>
-            <div class="value" id="high-score">12,450</div>
-          </div>
-        </div>
-        <div class="tile">
-          <div>
-            <div class="label">Games Played</div>
-            <div class="value" id="games-played">234</div>
-          </div>
-        </div>
-        <div class="tile">
-          <div>
-            <div class="label">Time Played</div>
-            <div class="value" id="time-played">12h 34m</div>
-          </div>
-        </div>
-      </div>
-  </div>
-  </section>
+    <section class="profile-stats">
+        <div class="stats_box">
+            <h3 class="title">YOUR STATS</h3>
+            <div class="stats-grid">
+                <div class="tile">
+                    <div>
+                        <div class="label">World Rank</div>
+                        <div class="value" id="world-rank">#1</div>
+                    </div>
+                </div>
 
-  <section class="Logout">
-    <a href="./home.html" id="logout_button">LOG OUT</a>  
-  </section>
+                <div class="tile">
+                    <div>
+                        <div class="label">High Score</div>
+                        <div class="value" id="high-score">0</div>
+                    </div>
+                </div>
 
-  <footer>
-    <p>© 2026 SCRAMBLED. All rights reserved. No eggs were harmed in the making of this game.</p>
-  </footer>
+                <div class="tile">
+                    <div>
+                        <div class="label">Games Played</div>
+                        <div class="value" id="games-played">0</div>
+                    </div>
+                </div>
+
+                <div class="tile">
+                    <div>
+                        <div class="label">Time Played</div>
+                        <div class="value" id="time-played">0h 0m</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="Logout">
+        <a href="./home.html" id="logout_button">LOG OUT</a>
+    </section>
+
+    <footer>
+        <p>© 2026 SCRAMBLED. All rights reserved. No eggs were harmed in the making of this game.</p>
+    </footer>
 
 </body>
 </html>
