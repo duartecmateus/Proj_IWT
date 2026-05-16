@@ -9,6 +9,8 @@
     <title> ACCOUNT - SCRAMBLED</title>
     <link rel="stylesheet" href="CSS/general.css">
     <link rel="stylesheet" href="CSS/account_style.css">
+    <script src="JavaScript/nav_user.js" defer></script>
+    <script src="JavaScript/account.js" defer></script>
 </head>
 <body>
 
@@ -17,26 +19,16 @@
       <nav>
           <a href="./home.html">HOME</a>
           <a href="./history.html">HISTORY</a>
-          <a href="./login.html">LOGIN</a>
+          <a href="./login.html" id="nav-login-link">LOGIN</a>
       </nav>
   </header>
-
-  <!-- 
-  <div>
-      <h1>
-          WELCOME BACK, EGGSLAYER3000
-      </h1>
-      <p>You're egg-eptionally talented</p>
-      <a href=""> EDIT PROFILE</a>  Falta adicionar o link
-  </div>
-  -->
 
   <section class="edit_profile_box">
       <div class="profile_box">
         <h1 class="profile_title">EDIT YOUR PROFILE</h1>
-        <form class="profile-form"> <!--Rever Form!!!!-->
+        <form class="profile-form" id="profile-form">
           <div class="form_group">
-            <label class="form_label">USERNAME</label>
+            <label class="form_label" for="username">USERNAME</label>
             <input
               type="text"
               id="username"
@@ -62,7 +54,7 @@
           </div>
           <div class="button_row">
             <button type="submit" class="btn btn_save">✓ SAVE CHANGES</button>
-            <button type="button" class="btn btn_cancel">✕ CANCEL</button>
+            <button type="button" class="btn btn_cancel" id="cancel-button">✕ CANCEL</button>
           </div>
         </form>
       </div>
@@ -75,25 +67,25 @@
         <div class="tile">
           <div>
             <div class="label">World Rank</div>
-            <div class="value">#847</div>
+            <div class="value" id="world-rank">#847</div>
           </div>
         </div>
         <div class="tile">
           <div>
             <div class="label">High Score</div>
-            <div class="value">12,450</div>
+            <div class="value" id="high-score">12,450</div>
           </div>
         </div>
         <div class="tile">
           <div>
             <div class="label">Games Played</div>
-            <div class="value">234</div>
+            <div class="value" id="games-played">234</div>
           </div>
         </div>
         <div class="tile">
           <div>
             <div class="label">Time Played</div>
-            <div class="value">12h 34m</div>
+            <div class="value" id="time-played">12h 34m</div>
           </div>
         </div>
       </div>
