@@ -59,6 +59,19 @@
   to   { filter: drop-shadow(0 0 12px #FFD23F) brightness(1.25); }
 }
 
+/* ── HINTED ────────────────────────────────────── */
+.hint-cell {
+    outline: 3px solid #FFD23F;
+    outline-offset: -3px;
+    border-radius: 4px;
+    animation: hint-pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes hint-pulse {
+    from { outline-color: #ff3f3f; }
+    to   { outline-color: #f07a00; }
+}
+
 /* ── TROCA (SWAP) ────────────────────────────────── */
 .cell.swap-active img {
   transition: transform 0.2s ease;

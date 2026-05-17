@@ -197,6 +197,33 @@ h1 {
   background: #263080;
 }
 
+#btn_hint {
+    background: #FFD23F;
+    color: #1a2560;
+    border: none;
+    border-radius: 12px;
+    padding: 13px;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: opacity 0.3s ease, background 0.15s;
+}
+
+#btn_hint:hover:not(:disabled) {
+  background: #f0c000;
+}
+
+#btn_hint.hint-cooldown {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
 #btn_quit {
   background: #fff;
   color: #1a2560;
@@ -295,6 +322,7 @@ h1 {
   }
 
   #btn_restart,
+  #btn_hint
   #btn_quit {
     font-size: 10px;
     width: auto;

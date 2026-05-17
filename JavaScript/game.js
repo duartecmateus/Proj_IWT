@@ -181,6 +181,42 @@ export function Matcher(gridRef)
         return false;
     }
 
+
+    /**
+     * Checks every adjacent pair of cells and returns the first coordinates
+     * found that would produce a match of MIN_MATCH or more eggs. So that
+     * they can later be highlighted.
+     */
+    this.findHint = function() {
+        const grid = this.gridRef.grid;
+        
+        const swap = (r1, c1, r2, c2) => {
+            const t = grid[r1][c1];
+            grid[r1][c1] = grid[r2][c2];
+            grid[r2][c2] = t;
+        };
+        for (let r = 0; r < GRID_SIZE; r++) {
+            for (let c = 0; c < GRID_SIZE; c++) {
+
+                if (c + 1 < GRID_SIZE) {
+                    swap(r, c, r, c + 1);
+                    const found = this._hasMatch();
+                    swap(r, c + 1, r, c); // restore
+                    if (found) return [{ row: r, col: c }, { row: r, col: c + 1 }];
+                }
+
+                if (r + 1 < GRID_SIZE) {
+                    swap(r, c, r + 1, c);
+                    const found = this._hasMatch();
+                    swap(r + 1, c, r, c); // restore
+                    if (found) return [{ row: r, col: c }, { row: r + 1, col: c }];
+                }
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Fast scan — returns true as soon as any run of MIN_MATCH
      * identical (non-null) eggs is found horizontally or vertically.

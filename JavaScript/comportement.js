@@ -22,6 +22,8 @@ let gravity_classe = new Gravity(gridRef);
 let score_classe   = new Score();
 
 let selected    = null;
+let hintTimeout  = null;
+let hintCells    = [];
 let isAnimating = false;
 let gameOver    = false;
 
@@ -183,6 +185,7 @@ function processMatches(matches) {
         isAnimating = false;
         checkGameOver();
         checkPossibleMoves();
+        resetHintCooldown();
       }
     }, 350);
 
@@ -230,6 +233,58 @@ function animateSwap(r1, c1, r2, c2, callback, reverse = false) {
     });
     callback();
   }, DURATION + 30);
+}
+
+/* ════════════════════════════════════════════════════
+   HINT BUTTON
+   ════════════════════════════════════════════════════ */
+
+function resetHintCooldown() {
+    const btn = document.getElementById('btn_hint');
+    if (!btn) return;
+
+    btn.disabled = true;
+    btn.classList.add('hint-cooldown');
+
+    clearTimeout(hintTimeout);
+    hintTimeout = setTimeout(() => {
+        btn.disabled = false;
+        btn.classList.remove('hint-cooldown');
+    }, 5000);
+}
+
+function showHint() {
+    if (isAnimating || gameOver) return;
+
+    // Limpar dica anterior
+    hintCells.forEach(({ row, col }) => {
+        const cell = piecesDiv.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+        if (cell) cell.classList.remove('hint-cell');
+    });
+    hintCells = [];
+
+    const pair = matcher_classe.findHint();
+    if (!pair) return;
+
+    // Penalização
+    score_classe.addPoints(-5);
+    updateHUD();
+
+    // Destacar as duas células
+    hintCells = pair;
+    pair.forEach(({ row, col }) => {
+        const cell = piecesDiv.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+        if (cell) cell.classList.add('hint-cell');
+    });
+
+    // Remover destaque após 2 segundos
+    setTimeout(() => {
+        hintCells.forEach(({ row, col }) => {
+            const cell = piecesDiv.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+            if (cell) cell.classList.remove('hint-cell');
+        });
+        hintCells = [];
+    }, 2000);
 }
 
 /* ════════════════════════════════════════════════════
@@ -411,6 +466,7 @@ function restartGame() {
   buildGrid();
   renderGrid();
   startTimer();
+  resetHintCooldown();
 }
 
 /* ════════════════════════════════════════════════════
@@ -422,6 +478,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnRestart) {
     btnRestart.removeAttribute('onclick');
     btnRestart.addEventListener('click', restartGame);
+  }
+
+  const btnHint = document.getElementById('btn_hint');
+  if (btnHint) {
+    btnHint.addEventListener('click', showHint);
   }
 
   initGame();
