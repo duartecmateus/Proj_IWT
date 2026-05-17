@@ -27,6 +27,9 @@ let hintCells    = [];
 let isAnimating = false;
 let gameOver    = false;
 
+let cursor_row = 0;
+let cursor_col = 0;
+
 let piecesDiv, scoreEl, eggsCountEl, eggsBarEl, eggsHintEl;
 
 /* ════════════════════════════════════════════════════
@@ -77,6 +80,8 @@ function renderGrid() {
       if (selected && selected.row === r && selected.col === c) {
         cell.classList.add('selected');
       }
+
+      if (cursor_row === r && cursor_col === c) cell.classList.add('cursor');
 
       cell.addEventListener('click', () => handleCellClick(r, c));
       piecesDiv.appendChild(cell);
@@ -470,6 +475,34 @@ function restartGame() {
 }
 
 /* ════════════════════════════════════════════════════
+   KEYBOARD NAVIGATION
+   ════════════════════════════════════════════════════ */
+
+document.addEventListener('keydown', (e) => {
+    if (gameOver) return;
+
+    const moves = {
+      'w': [-1, 0],
+      's': [1, 0],
+      'a': [0, -1],
+      'd': [0, 1],
+    }
+
+    if (moves[e.key]) {
+      const [cr , cc] = moves[e.key];
+      cursor_row = Math.max(0 , Math.min(GRID_SIZE -1, cursor_row + cr));
+      cursor_col = Math.max(0 , Math.min(GRID_SIZE -1, cursor_col + cc));
+      renderGrid();
+      return;
+    }
+
+    if (e.key === ' ') {
+      e.preventDefault();
+      handleCellClick(cursor_row, cursor_col);
+    }
+});
+
+/* ════════════════════════════════════════════════════
    ARRANQUE
    ════════════════════════════════════════════════════ */
 
@@ -486,4 +519,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initGame();
-});
+})

@@ -68,8 +68,13 @@
 }
 
 @keyframes hint-pulse {
-    from { outline-color: #ff3f3f; }
-    to   { outline-color: #f07a00; }
+  from { outline-color: #ff3f3f; }
+  to   { outline-color: #f07a00; }
+}
+
+.cursor {
+  outline: 3px solid #CC4520;
+  outline-offset: -3px;
 }
 
 /* ── TROCA (SWAP) ────────────────────────────────── */
