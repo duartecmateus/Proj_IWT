@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="CSS/general.css">
     <link rel="stylesheet" href="CSS/history.css">
     <script src="JavaScript/nav_user.js" defer></script>
+    <script src="JavaScript/history_leaderboard.js" defer></script>
 </head>
 <body>
 
@@ -65,52 +66,9 @@
 
         <section class="leaderboard">
             <h2 class="title">WORLD TOP SCORERS</h2>
-        
-            <div class="leaderboard-list">
-                <div class="player-card highlight">
-                    <div class="rank-info">
-                        <span class="rank-number">#1</span>
-                        <span class="avatar">🥷</span>
-                        <span class="player-name">EggMaster2000</span>
-                    </div>
-                    <div class="world-score">696,696</div>
-                </div>
 
-                <div class="player-card">
-                    <div class="rank-info">
-                        <span class="rank-number">#2</span>
-                        <span class="avatar">🌐</span>
-                        <span class="player-name">ShellShock</span>
-                    </div>
-                    <div class="world-score">676,767</div>
-                </div>
-
-                <div class="player-card">
-                    <div class="rank-info">
-                        <span class="rank-number">#3</span>
-                        <span class="avatar">👵</span>
-                        <span class="player-name">YolkYoda</span>
-                    </div>
-                    <div class="world-score">487,600</div>
-                </div>
-
-                <div class="player-card">
-                    <div class="rank-info">
-                        <span class="rank-number">#4</span>
-                        <span class="avatar">🦤</span>
-                        <span class="player-name">CrackedCoder</span>
-                    </div>
-                    <div class="world-score">176,200</div>
-                </div>
-
-                <div class="player-card">
-                    <div class="rank-info">
-                        <span class="rank-number">#5</span>
-                        <span class="avatar">🍳</span>
-                        <span class="player-name">FriedFanatic</span>
-                    </div>
-                    <div class="world-score">95,800</div>
-                </div>
+            <div class="leaderboard-list" id="leaderboard-list">
+                <!-- Filled automatically by history_leaderboard.js -->
             </div>
         </section>
 
@@ -147,5 +105,5 @@
         <p>© 2026 SCRAMBLED. All rights reserved. No eggs were harmed in the making of this game.</p>
     </footer>
 
-    </body>
+</body>
 </html>
