@@ -60,8 +60,14 @@
 }
 
 /* ── HINTED ────────────────────────────────────── */
-.hint-cell {
-    outline: 3px solid #FFD23F;
+.hint-cell{
+  z-index: 10;
+}
+
+.hint-cell img{
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 6px #ff523f) brightness(1.15);
+    outline: 3px solid #000000;
     outline-offset: -3px;
     border-radius: 4px;
     animation: hint-pulse 0.6s ease-in-out infinite alternate;
@@ -69,7 +75,7 @@
 
 @keyframes hint-pulse {
   from { outline-color: #ff3f3f; }
-  to   { outline-color: #f07a00; }
+  to   { outline-color: #f02400; }
 }
 
 .cursor {

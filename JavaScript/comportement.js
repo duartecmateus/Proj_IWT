@@ -479,7 +479,7 @@ function restartGame() {
    ════════════════════════════════════════════════════ */
 
 document.addEventListener('keydown', (e) => {
-    if (gameOver) return;
+    if (gameOver || isAnimating) return;
 
     const moves = {
       'w': [-1, 0],
