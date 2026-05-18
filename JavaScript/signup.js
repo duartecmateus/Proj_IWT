@@ -26,6 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("This email is already registered.");
             return;
         }
+        
+        const valideDate = new Date(birthdate) >= new Date();
+
+        if (valideDate) {
+            alert("Your Egg hasn´t hatched yet");
+            return;
+        }
 
         const username = email.split("@")[0];
 

@@ -399,7 +399,7 @@ function checkGameOver() {
 }
 
 /* ════════════════════════════════════════════════════
-   DEADLOCK — sem jogadas possíveis
+   DEADLOCK
    ════════════════════════════════════════════════════ */
 
 function checkPossibleMoves() {
@@ -429,6 +429,9 @@ function showNoMovesNotice(onDone) {
     }, 400);
   }, 1800);
 }
+/* ════════════════════════════════════════════════════
+   END
+   ════════════════════════════════════════════════════ */
 
 function showEndScreen(won) {
   const overlay = document.createElement('div');
