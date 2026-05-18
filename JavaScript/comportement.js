@@ -521,5 +521,12 @@ document.addEventListener('DOMContentLoaded', () => {
     btnHint.addEventListener('click', showHint);
   }
 
+  const music_play = document.getElementById('music');
+  window.addEventListener('click', () => 
+  {
+    music_play.muted = false;
+  });
+
+
   initGame();
 })

@@ -291,6 +291,10 @@ h1 {
   background: rgba(255, 210, 63, 0.30);
 }
 
+#background-music {
+  display: none;
+}
+
 @media screen and (max-width: 1100px) {
   #game_layout{
     flex-direction: column;

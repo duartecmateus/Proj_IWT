@@ -15,7 +15,7 @@
 
 /*-----------------HEADER--------------------*/
  header {
-  background: #F2E8CF;
+  background: antiquewhite;
   position: fixed;
   z-index: 2;
   top: 0px;
@@ -37,7 +37,7 @@
  }
 
  header p{
-    color: #FDC500 !important;
+    color: #FDC500 !important;     /*MUDAR A COR PARA ALGO COM MAIS CONTRAST*/
  }
 
   header a{
