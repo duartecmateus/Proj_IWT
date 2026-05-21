@@ -612,6 +612,7 @@ function showEndScreen(won) {
             <div class="modal-buttons">
                 <button id="modal-btn-restart">↺ JOGAR NOVAMENTE</button>
                 <button class="secondary" id="modal-btn-change">🎲 MUDAR DIFICULDADE</button>
+                <button class="secondary" id="modal-btn-leaderboard">🏆 LEADERBOARD</button>
                 <button class="secondary" id="modal-btn-quit">✕ SAIR</button>
             </div>
         </div>
@@ -633,6 +634,11 @@ function showEndScreen(won) {
     /* Sair */
     overlay.querySelector('#modal-btn-quit').addEventListener('click', () => {
         window.location.href = './home.html';
+    });
+
+    /* Leaderboard */
+    overlay.querySelector('#modal-btn-leaderboard').addEventListener('click', () => {
+        window.location.href = './history.html#leader';
     });
 }
 
