@@ -4,7 +4,7 @@
 
 /* ── CONFIGURAÇÃO ─────────────────────────────────── */
 
-import { Eggs, randomEgg, Grid, Swap, Matcher, Gravity, Score } from './game.js';
+import { Eggs, randomEgg, Grid, Keyboard, Swap, Matcher, Gravity, Score } from './game.js';
 
 const GRID_SIZE  = 8; 
 const TOTAL_EGGS = 100;
@@ -15,11 +15,12 @@ let grid_classe  = new Grid();
 let eggs_classe  = new Eggs();
 const EGG_IMAGES = eggs_classe.EGG_IMAGES;
 
-let gridRef        = { grid: grid_classe.grid };
-let swap_classe    = new Swap(gridRef);
-let matcher_classe = new Matcher(gridRef);
-let gravity_classe = new Gravity(gridRef);
-let score_classe   = new Score();
+let gridRef         = { grid: grid_classe.grid };
+let keyboard_classe = new Keyboard
+let swap_classe     = new Swap(gridRef);
+let matcher_classe  = new Matcher(gridRef);
+let gravity_classe  = new Gravity(gridRef);
+let score_classe    = new Score();
 
 let selected    = null;
 let hintTimeout  = null;
@@ -255,7 +256,7 @@ function resetHintCooldown() {
     hintTimeout = setTimeout(() => {
         btn.disabled = false;
         btn.classList.remove('hint-cooldown');
-    }, 5000);
+    }, 30000);
 }
 
 function showHint() {
@@ -480,21 +481,19 @@ function restartGame() {
 /* ════════════════════════════════════════════════════
    KEYBOARD NAVIGATION
    ════════════════════════════════════════════════════ */
+  
+function moveCursor(cr, cc) {
+  cursor_row = Math.max(0 , Math.min(GRID_SIZE -1, cursor_row + cr));
+  cursor_col = Math.max(0 , Math.min(GRID_SIZE -1, cursor_col + cc));
+}
 
 document.addEventListener('keydown', (e) => {
     if (gameOver || isAnimating) return;
 
-    const moves = {
-      'w': [-1, 0],
-      's': [1, 0],
-      'a': [0, -1],
-      'd': [0, 1],
-    }
+    const move = keyboard_classe.getKeyMove(e.key);
 
-    if (moves[e.key]) {
-      const [cr , cc] = moves[e.key];
-      cursor_row = Math.max(0 , Math.min(GRID_SIZE -1, cursor_row + cr));
-      cursor_col = Math.max(0 , Math.min(GRID_SIZE -1, cursor_col + cc));
+    if (move) {
+      moveCursor(move[0], move[1]);
       renderGrid();
       return;
     }

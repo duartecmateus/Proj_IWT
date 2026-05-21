@@ -79,8 +79,10 @@
 }
 
 .cursor {
-  outline: 3px solid #CC4520;
+  z-index: 10;
+  outline: 5px solid #CC4520;
   outline-offset: -3px;
+  border-radius: 4px;
 }
 
 /* ── TROCA (SWAP) ────────────────────────────────── */
