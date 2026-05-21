@@ -410,7 +410,7 @@ function resetHintCooldown() {
     hintTimeout = setTimeout(() => {
         btn.disabled = false;
         btn.classList.remove('hint-cooldown');
-    }, 30000);
+    }, 100);
 }
 
 function showHint() {
@@ -576,8 +576,8 @@ function showNoMovesNotice(onDone) {
         setTimeout(() => {
             notice.remove();
             onDone();
-        }, 400);
-    }, 1800);
+        }, 1000);
+    }, 2000);
 }
 
 
@@ -596,49 +596,11 @@ function checkGameOver() {
 /* ════════════════════════════════════════════════════
    ECRÃ FINAL — inclui tabela de pontuações
    ════════════════════════════════════════════════════ */
-
-function buildLeaderboardHTML(config, currentScore) {
-    const board = getLeaderboard(config);
-    if (board.length === 0) return '';
-
-    const medals = ['🥇', '🥈', '🥉'];
-
-    const rows = board.slice(0, 5).map((entry, i) => {
-        const isCurrent = entry.score === currentScore;
-        const medal     = medals[i] ?? `${i + 1}.`;
-        const mins      = Math.floor(entry.time / 60);
-        const secs      = (entry.time % 60).toString().padStart(2, '0');
-        return `
-            <tr class="${isCurrent ? 'current-entry' : ''}">
-                <td><span class="rank-medal">${medal}</span></td>
-                <td>${entry.name}</td>
-                <td>${entry.score.toLocaleString('pt-PT')}</td>
-                <td>${mins}:${secs}</td>
-                <td>${entry.date}</td>
-            </tr>`;
-    }).join('');
-
-    return `
-        <div class="leaderboard-section">
-            <h4>🏆 Top 5 — ${config.label}</h4>
-            <table class="leaderboard-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Jogador</th>
-                        <th>Score</th>
-                        <th>Tempo</th>
-                        <th>Data</th>
-                    </tr>
-                </thead>
-                <tbody>${rows}</tbody>
-            </table>
-        </div>`;
-}
-
+   
 function showEndScreen(won) {
     const overlay = document.createElement('div');
     overlay.id = 'game-overlay';
+    const time = document.querySelector('#timer-container .value')?.textContent
 
     overlay.innerHTML = `
         <div id="game-modal">
@@ -646,7 +608,7 @@ function showEndScreen(won) {
             <h2>${won ? 'ALL SCRAMBLED!' : 'GAME OVER'}</h2>
             <p class="modal-config">${currentConfig.label}</p>
             <p class="modal-score">Score: <strong>${score_classe.score.toLocaleString('pt-PT')}</strong></p>
-            <p class="modal-time">Time: <strong>${document.querySelector('#timer-container .value')?.textContent || '0:00'}</strong></p>
+            <p class="modal-time">Time: <strong>${time|| '0:00'}</strong></p>
             <div class="modal-buttons">
                 <button id="modal-btn-restart">↺ JOGAR NOVAMENTE</button>
                 <button class="secondary" id="modal-btn-change">🎲 MUDAR DIFICULDADE</button>
