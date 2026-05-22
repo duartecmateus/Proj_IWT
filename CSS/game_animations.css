@@ -210,7 +210,7 @@
 }
 
 /* ══════════════════════════════════════════════════
-   ECRÃ DE ESCOLHA DE DIFICULDADE
+   ECRÃ DE ESCOLHA DE DIFICULDADE E MODO
    ══════════════════════════════════════════════════ */
 
 #difficulty-overlay {
@@ -244,6 +244,17 @@
 #difficulty-modal h2 {
   margin: 0 0 28px;
   color: #FFD23F;
+}
+
+.active {
+  background: #FFD23F !important;
+  border-color: #ff9f1c !important;
+  color: #1a1a2e !important;
+  transform: translateY(-2px);
+}
+
+.active .diff-desc{
+  color: #00296B;
 }
 
 /* ── Botões de preset ─── */
