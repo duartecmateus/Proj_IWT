@@ -23,9 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById("logout_button");
 
     const worldRank = document.getElementById("world-rank");
-    const highScore = document.getElementById("high-score");
     const gamesPlayed = document.getElementById("games-played");
     const timePlayed = document.getElementById("time-played");
+    const highScoreNormal = document.getElementById("high-score-normal");
+    const highScoreTimed = document.getElementById("high-score-timed");
+    const highScoreCautious = document.getElementById("high-score-cautious");
 
     if (!profileForm || !usernameInput || !cancelButton || !logoutButton) return;
 
@@ -33,17 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     usernameInput.value = loggedInUser.username || "";
 
-    const stats = loggedInUser.stats || {
-        worldRank: 1,
-        highScore: 0,
-        gamesPlayed: 0,
-        timePlayedSeconds: 0
-    };
+    const stats = loggedInUser.stats || {};
+    const modeHighScores = stats.modeHighScores || {};
 
-    if (worldRank) worldRank.textContent = `#${Number(stats.worldRank || 1)}`;
-    if (highScore) highScore.textContent = Number(stats.highScore || 0).toLocaleString("pt-PT");
-    if (gamesPlayed) gamesPlayed.textContent = Number(stats.gamesPlayed || 0);
-    if (timePlayed) timePlayed.textContent = formatTimePlayed(stats.timePlayedSeconds || 0);
+    const rankValue = Number(stats.worldRank || 0);
+    const gamesPlayedValue = Number(stats.gamesPlayed || 0);
+    const timePlayedValue = Number(stats.timePlayedSeconds || 0);
+
+    const normalValue = Number(modeHighScores.normal || 0);
+    const timedValue = Number(modeHighScores.timed || 0);
+    const cautiousValue = Number(modeHighScores.cautious || 0);
+
+    if (gamesPlayed) gamesPlayed.textContent = gamesPlayedValue;
+    if (worldRank) worldRank.textContent = `#${rankValue}`;
+    if (timePlayed) timePlayed.textContent = formatTimePlayed(timePlayedValue);
+
+    if (highScoreNormal) highScoreNormal.textContent = normalValue.toLocaleString("pt-PT");
+    if (highScoreTimed) highScoreTimed.textContent = timedValue.toLocaleString("pt-PT");
+    if (highScoreCautious) highScoreCautious.textContent = cautiousValue.toLocaleString("pt-PT");
 
     avatarButtons.forEach(button => {
         if (button.textContent.trim() === selectedAvatar) {

@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("This email is already registered.");
             return;
         }
-        
+
         const valideDate = new Date(birthdate) >= new Date();
 
         if (valideDate) {
@@ -44,16 +44,20 @@ document.addEventListener("DOMContentLoaded", () => {
             avatar,
             stats: {
                 worldRank: 1,
-                highScore: 0,
                 gamesPlayed: 0,
-                timePlayedSeconds: 0
+                timePlayedSeconds: 0,
+                totalPoints: 0,
+                modeHighScores: {
+                    normal: 0,
+                    timed: 0,
+                    cautious: 0
+                }
             }
         };
 
         users.push(newUser);
 
-        // simple local ranking
-        users.sort((a, b) => (b.stats?.highScore || 0) - (a.stats?.highScore || 0));
+        users.sort((a, b) => Number(b.stats?.totalPoints || 0) - Number(a.stats?.totalPoints || 0));
         users.forEach((user, index) => {
             if (!user.stats) user.stats = {};
             user.stats.worldRank = index + 1;

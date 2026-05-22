@@ -566,10 +566,11 @@ function updateHeatMeter() {
 
 function updateLocalRanks(users) {
     const sortedUsers = [...users].sort((a, b) => {
-        const scoreA = Number(a.stats?.highScore || 0);
-        const scoreB = Number(b.stats?.highScore || 0);
-        return scoreB - scoreA;
+        const pointsA = Number(a.stats?.totalPoints || 0);
+        const pointsB = Number(b.stats?.totalPoints || 0);
+        return pointsB - pointsA;
     });
+
     sortedUsers.forEach((user, index) => {
         if (!user.stats) user.stats = {};
         user.stats.worldRank = index + 1;
@@ -580,39 +581,55 @@ function saveGameStats() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     if (!loggedInUser) return;
 
-    let users      = JSON.parse(localStorage.getItem('users')) || [];
+    let users = JSON.parse(localStorage.getItem('users')) || [];
     const userIndex = users.findIndex(u => u.email === loggedInUser.email);
     if (userIndex === -1) return;
 
     if (!users[userIndex].stats) {
         users[userIndex].stats = {
-            worldRank: 1, highScore: 0,
-            gamesPlayed: 0, timePlayedSeconds: 0,
+            worldRank: 1,
+            gamesPlayed: 0,
+            timePlayedSeconds: 0,
+            totalPoints: 0,
+            modeHighScores: {
+                normal: 0,
+                timed: 0,
+                cautious: 0
+            }
         };
     }
 
     const s = users[userIndex].stats;
-    s.gamesPlayed        = Number(s.gamesPlayed || 0) + 1;
-    s.timePlayedSeconds  = Number(s.timePlayedSeconds || 0) + timerSeconds;
 
-    /* Pontuação máxima global */
-    s.highScore = Math.max(Number(s.highScore || 0), score_classe.score);
+    if (!s.modeHighScores) {
+        s.modeHighScores = {
+            normal: 0,
+            timed: 0,
+            cautious: 0
+        };
+    }
 
-    /* Pontuação máxima por configuração (ex.: highScore_easy, highScore_hard, …) */
-    const configKey = `highScore_${currentConfig.key}`;
-    s[configKey] = Math.max(Number(s[configKey] || 0), score_classe.score);
+    s.gamesPlayed = Number(s.gamesPlayed || 0) + 1;
+    s.timePlayedSeconds = Number(s.timePlayedSeconds || 0) + timerSeconds;
+    s.totalPoints = Number(s.totalPoints || 0) + score_classe.score;
+
+    const modeKey = currentMode?.key || 'normal';
+    s.modeHighScores[modeKey] = Math.max(
+        Number(s.modeHighScores[modeKey] || 0),
+        score_classe.score
+    );
 
     updateLocalRanks(users);
+
     localStorage.setItem('users', JSON.stringify(users));
     localStorage.setItem('loggedInUser', JSON.stringify(users[userIndex]));
 
-    /* Guardar na tabela de pontuações da configuração activa */
-    const name = loggedInUser.name || loggedInUser.email || 'Anónimo';
+    const name = loggedInUser.username || loggedInUser.email || 'Anónimo';
     saveToLeaderboard(currentConfig, {
         name,
         score: score_classe.score,
-        time:  timerSeconds,
-        date:  new Date().toLocaleDateString('pt-PT'),
+        time: timerSeconds,
+        date: new Date().toLocaleDateString('pt-PT'),
     });
 }
 

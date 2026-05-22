@@ -10,7 +10,7 @@ body {
 .profile_box,
 .stats_box,
 #logout_button {
-  width: min(768px, calc(100% - 40px)); /* Width is the smaller of 768px or 100% minus 40px */
+  width: min(900px, calc(100% - 40px));
 }
 
 /* Edit profile section */
@@ -88,12 +88,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer; /* Shows the hand cursor when hovering */
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease; /* Animates transform, border color, and background changes over 0.2s */
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .avatar_option:hover {
-  transform: translateY(-2px); /* Moves the element up by 2px*/
+  transform: translateY(-2px);
 }
 
 .avatar_option.selected {
@@ -145,16 +145,16 @@ body {
   text-transform: uppercase;
 }
 
-.stats-grid {
+.stats-grid-3x2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
 
 .tile {
   background: #fbf7ed;
   border-radius: 16px;
-  min-height: 120px;
+  min-height: 140px;
   display: grid;
   place-items: center;
   text-align: center;
@@ -170,9 +170,13 @@ body {
 
 .value {
   color: #12397f;
-  font-size: 3.2rem;
+  font-size: 2.6rem;
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.1;
+}
+
+.small-value {
+  font-size: 2.1rem;
 }
 
 /* Logout button */
@@ -196,7 +200,12 @@ body {
   background: #fae08a;
 }
 
-/* For phones or smaller screens */
+@media (max-width: 900px) {
+  .stats-grid-3x2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .profile_box,
   .stats_box,
@@ -209,12 +218,12 @@ body {
     font-size: 1.8rem;
   }
 
-  .stats-grid {
-    grid-template-columns: 1fr;
+  .value {
+    font-size: 2.2rem;
   }
 
-  .value {
-    font-size: 2.6rem;
+  .small-value {
+    font-size: 1.8rem;
   }
 }
 
@@ -237,6 +246,10 @@ body {
 
   .btn {
     width: 100%;
+  }
+
+  .stats-grid-3x2 {
+    grid-template-columns: 1fr;
   }
 
   #logout_button {
