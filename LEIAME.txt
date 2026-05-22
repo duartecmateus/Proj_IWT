@@ -1,6 +1,13 @@
-Duarte Mateus N62019: Tudo relacionado com Local Storage,ou seja, account.js, comportement.js, history_leaderboard.js, signup.js, login.js e alterações necessárias a HTML e CSS como, por exemplo edit_account.html e account_style.css, esforço: 33% 
+Duarte Mateus N62019: Tudo relacionado com Local Storage,ou seja, account.js, comportement.js, history_leaderboard.js, signup.js, login.js e alterações necessárias a HTML e CSS como, por exemplo edit_account.html e account_style.css
 
-Gabriel Lima N62796: , esforço: 33%
+, esforço: 33% 
+
+Gabriel Lima N62796: , Tudos os requisitos essencias relacionado ao Jogo + ums extras, ou seja funcoes de comportement.js: initGame, cacheDOMRefs, startWithConfig, updateDifficultyLabel, showDifficultyScreen, checkMovesLeft, buildGrid, renderGrid
+handelCellClick, selectCell, clearSelection, attemptSwap, processMatches, animateSwap, startTimer, updateTimerDisplay, updateHUD, updateHeatMeter, checkPossibleMoves, showNoMovesNotice, checkGameOver, showEndScreen
+restartGame
+funcoes/objectos de game.js: Eggs, randomEgg, Grid, Swap, Matcher, Gravity, Score, DIFFICULTY_CONFIGS
+
+,esforço: 33%
 
 Miguel Moreira N59712: , esforço: 33%
 
