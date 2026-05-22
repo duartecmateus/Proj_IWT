@@ -731,6 +731,10 @@ function updateHUD() {
                 ? `${remaining} eggs to go!`
                 : '🎉 All scrambled!';    
         }
+
+        if (currentMode?.key === 'timed') {
+            eggsHintEl.textContent = '🎉 All scrambled!'; 
+        }
         
     }
 
