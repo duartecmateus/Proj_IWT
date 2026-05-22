@@ -18,15 +18,16 @@ const SCORE_PER_EGG = 100;
  */
 export function Eggs() {
     this.EGG_IMAGES = [
-        'Imagens/ovo-vermelho.png',
-        'Imagens/ovo-estrelado.png',
-        'Imagens/ovo-dia-dos-muertos.png',
-        'Imagens/ovo-amarelo.png',
-        'Imagens/cat_egg.jpg',
-        'Imagens/humpty_dumpty.jpg',
-        'Imagens/togepie.jpg',
-        'Imagens/Avestruz_trabalho.jpg',
-        'Imagens/NINJA_OVO.jpg',
+        'Imagens/IMG_1297.PNG',
+        'Imagens/IMG_1299.PNG',
+        'Imagens/IMG_1300.PNG',
+        'Imagens/IMG_1302.PNG',
+        'Imagens/IMG_1303.PNG',
+        'Imagens/IMG_1305.PNG',
+        'Imagens/IMG_1307.PNG',
+        'Imagens/IMG_1311.PNG',
+        'Imagens/IMG_1315.PNG',
+        'Imagens/IMG_1312.PNG',
     ];
 }
 
