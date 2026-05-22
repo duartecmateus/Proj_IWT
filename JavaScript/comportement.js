@@ -11,7 +11,7 @@ import {
 /* ════════════════════════════════════════════════════
    ESTADO GLOBAL
    ════════════════════════════════════════════════════ */
-
+const eggs_classe = new Eggs();
 const EGG_IMAGES  = eggs_classe.EGG_IMAGES;
 
 /* Configuração do modo e dificuldade de jogo activa  */
