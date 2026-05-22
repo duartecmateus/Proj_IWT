@@ -143,9 +143,16 @@ h3 {
 
   /*-----------------Egg-Gallery/ Powersss--------------------*/
   
-.egg-grid, .power-grid{
+.egg-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 40px;
+  width: 95%;
+}
+
+.power-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
   grid-gap: 40px;
   width: 95%;
 }
