@@ -144,6 +144,7 @@ export function Swap(gridRef) {
 export function Matcher(gridRef, gridSize = 8) {
     this.gridRef  = gridRef;
     this.gridSize = gridSize;
+    this.SPECIAL_INDICES = new Set([7, 8]);
 
     /**
      * Procura no tabuleiro todas as combinações horizontais e verticais de 3 ou mais ovos iguais.
@@ -154,7 +155,6 @@ export function Matcher(gridRef, gridSize = 8) {
         const GS         = this.gridSize;
         const matched    = new Set();
         const bonusCells = new Set();
-        const SPECIAL_INDICES = new Set([7, 8]);
 
         /* --- Matches Horizontais --- */
         for (let l = 0; l < GS; l++) {
@@ -279,7 +279,7 @@ export function Matcher(gridRef, gridSize = 8) {
         for (let r = 0; r < GS; r++) {
             for (let c = 0; c <= GS - MIN_MATCH; c++) {
                 const type = grid[r][c];
-                if (type === null || SPECIAL_INDICES.has(type)) continue;
+                if (type === null || this.SPECIAL_INDICES.has(type)) continue;
                 if (type === grid[r][c + 1] && type === grid[r][c + 2]) return true;
             }
         }
@@ -287,7 +287,7 @@ export function Matcher(gridRef, gridSize = 8) {
         for (let c = 0; c < GS; c++) {
             for (let r = 0; r <= GS - MIN_MATCH; r++) {
                 const type = grid[r][c];
-                if (type === null || SPECIAL_INDICES.has(type)) continue;
+                if (type === null || this.SPECIAL_INDICES.has(type)) continue;
                 if (type === grid[r + 1][c] && type === grid[r + 2][c]) return true;
             }
         }
