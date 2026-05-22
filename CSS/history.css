@@ -9,15 +9,15 @@ main {
     margin: 20px auto;
 }
 
-.mini-bar {   /* meter nos headers??????*/
-  background-color: #FDC500 ;
-  width: 50px;
-  height: 4px;
-  border-radius: 2px;
-  margin: 5px auto 30px;
+.mini-bar {
+    background-color: #FDC500;
+    width: 50px;
+    height: 4px;
+    border-radius: 2px;
+    margin: 5px auto 30px;
 }
 
-  /*-----------------Egg_Chronicles--------------------*/
+/*-----------------Egg_Chronicles--------------------*/
 
 h1 {
     text-align: center;
@@ -55,7 +55,7 @@ h1 {
     background: white;
     border-radius: 20px;
     padding: 25px 35px;
-    box-shadow: 6px 6px 0px rgba(10, 35, 91, 0.1); /* Sombra sólida */
+    box-shadow: 6px 6px 0px rgba(10, 35, 91, 0.1);
 }
 
 .card h3 {
@@ -82,7 +82,7 @@ h1 {
     min-width: 80px;
     text-align: center;
     font-size: 16px;
-    box-shadow: 4px 4px 0px #FDC500;   
+    box-shadow: 4px 4px 0px #FDC500;
 }
 
 .title {
@@ -93,7 +93,7 @@ h1 {
     margin: 70px 0px 5px;
 }
 
-  /*-----------------Leaderboard------------------*/
+/*-----------------Leaderboard------------------*/
 
 .leaderboard {
     background-color: #00296B;
@@ -102,14 +102,13 @@ h1 {
     box-sizing: border-box;
     border: 4px solid #f1c40f;
     width: 100%;
-    margin: 40px auto ; 
+    margin: 40px auto;
     box-shadow: 0 15px 20px #f1c40f;
 }
 
 .leaderboard > h2 {
     margin: 10px 0px 50px;
 }
-
 
 .leaderboard-list {
     display: flex;
@@ -167,7 +166,116 @@ h1 {
     background: #07183eca;
 }
 
-  /*-----------------Grid_de_FAQ------------------*/
+.clickable-player {
+    cursor: pointer;
+}
+
+/*-----------------Modal------------------*/
+
+.player-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 20, 60, 0.72);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.player-modal-overlay.hidden {
+    display: none;
+}
+
+.player-modal {
+    position: relative;
+    width: min(700px, 100%);
+    background: #fff8e8;
+    border: 4px solid #f1c40f;
+    border-radius: 22px;
+    padding: 28px 24px 24px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.player-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    border: none;
+    background: #00296B;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.player-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.player-modal-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #00296B;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+}
+
+.player-modal-name {
+    margin: 0;
+    color: #00296B;
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.player-modal-rank {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.player-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.player-modal-tile {
+    background: white;
+    border: 2px solid #f1c40f;
+    border-radius: 16px;
+    padding: 18px 14px;
+    text-align: center;
+}
+
+.modal-label {
+    display: block;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.modal-value {
+    display: block;
+    color: #00296B;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+/*-----------------Grid_de_FAQ------------------*/
 
 .faq-grid {
     display: grid;
@@ -183,25 +291,23 @@ h1 {
     color: white;
 }
 
-.emoji {  
-    display: block; 
-    margin-bottom: 10px; 
+.emoji {
+    display: block;
+    margin-bottom: 10px;
     font-size: 30px;
 }
 
-.faq-card h3 { 
-    margin: 0 0 10px 0; 
-    font-size: 15px; 
+.faq-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 15px;
 }
 
-.faq-card p { 
-    color: #f1c40f; 
-    font-weight: bold; 
-    font-size: 13px; 
-    margin: 0; 
+.faq-card p {
+    color: #f1c40f;
+    font-weight: bold;
+    font-size: 13px;
+    margin: 0;
 }
-
-
 
 /* Smartphones */
 @media (max-width: 768px) {
@@ -209,21 +315,37 @@ h1 {
         padding: 10px 4px;
         font-size: 13px;
         text-align: center;
-        box-shadow: 2px 2px 0px #FDC500;   
-}
+        box-shadow: 2px 2px 0px #FDC500;
+    }
 
     .player-card {
         flex-direction: column;
     }
 
-    .podium, .faq-grid {
+    .podium,
+    .faq-grid {
         grid-template-columns: 1fr;
         width: 90%;
         margin: auto;
     }
+
+    .player-modal-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 /* Small Smartphones */
+@media (max-width: 520px) {
+    .player-modal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .player-modal-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
 @media (max-width: 400px) {
     .rank-number {
         font-size: 15px;
