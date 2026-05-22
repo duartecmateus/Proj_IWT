@@ -1,14 +1,9 @@
-Duarte Mateus N62019: HTML e CSS da página Account, desenvolvimento do Design, esforço: 33% 
+Duarte Mateus N62019: Tudo relacionado com Local Storage,ou seja, account.js, comportement.js, history_leaderboard.js, signup.js, login.js e alterações necessárias a HTML e CSS como, por exemplo edit_account.html e account_style.css, esforço: 33% 
 
-Gabriel Lima N62796: HTML e CSS das páginas Home ,History e a Grid da página game_window, esforço: 33%
+Gabriel Lima N62796: , esforço: 33%
 
-Miguel Moreira N59712: HTML e CSS das páginas Login e Singin, esforço: 33%
+Miguel Moreira N59712: , esforço: 33%
 
-Todos: HTML e CSS da página game_window, todos participámos de forma equivalente para o trabalho. Por questões de tempo não fomos capazes de organizar todos os documentos CSS como queríamos, nomeadamente não fomos capazes de, para cada html, gerar um css único que importa os outros CSS tendo apenas feito isto para o home.
+Requisitos essenciais: Todos
 
-Navegação no site:
-  Comece por abrir a página "home", sendo que é a página inicial e é onde se pode aceder ao jogo;
-  A página "game_window" apenas é acessível a partir do botão "PLAY NOW!", que se encontra na página "home";
-  A página "sign_up" apenas é acessível a partir do link "Crack open an egg!", que se encontra após a pergunta "Don't have an account?" na página "login";
-  A página "edit_account" apenas é acessível a partir dos botões amarelos "LOGIN" e "SIGN UP", presentes nas páginas "login" e "sign_up", respetivamente;
-  A página "login" pode ser acedida novamente a partir do link "Log in!", que se encontra na página "sign_up";
+Funcionalidades avançadas: Verificação de alinhamentos verticais, várias configurações de tabuleiros, animações associadas às jogadas, deteção automática da impossibilidade de fazer jogadas, botão de dica, joias especiais, segundo dispositivo de entrada, fazer o máximo de pontos até ser atindigo um limite de jogadas e fazer um máximo de pontos até ser antigifo um limite de tempo.
