@@ -475,6 +475,7 @@ function spawnSpecialEggs(bonusCells) {
         if (row > 0 && row < GS - 1 &&
             grid[row - 1][col] === null && grid[row + 1][col] === null) {
             grid[row][col] = pickSpecial();
+            return;
         }
     });
 }
