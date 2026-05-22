@@ -169,8 +169,8 @@ function showDifficultyScreen() {
                         <div class="custom-field">
                             <label>Grid Size</label>
                             <input type="number" id="custom-size"
-                                min="5" max="15" value="8"
-                                title="Entre 5 e 15">
+                                min="5" max="10" value="8"
+                                title="Entre 5 e 10">
                         </div>
                         <div class="custom-field">
                             <label>Eggs to eliminate</label>

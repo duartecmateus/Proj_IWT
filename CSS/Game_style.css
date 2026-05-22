@@ -246,7 +246,9 @@ h1 {
   background: #f0eeff;
 }
 
-/* ÁREA DO JOGO (frigideira) */
+/* ══════════════════════════════════════════════
+   ÁREA DO JOGO — TABULEIRO DINÂMICO
+*/
 
 .game-board {
   width: 100%;
@@ -255,22 +257,29 @@ h1 {
 }
 
 .game_grid {
+  /* Valor por omissão; JS sobrepõe com setProperty */
+  --grid-size: 15;
+
   width: min(800px, 98vw);
   aspect-ratio: 1 / 1;
   margin: auto;
   background-color: rgb(49, 47, 47);
-  background-image: 
-
+  background-image:
     linear-gradient(to right, whitesmoke 1px, transparent 1px),
     linear-gradient(to bottom, whitesmoke 1px, transparent 1px);
 
-  background-size: calc(100% / 8) calc(100% / 8);
+  /* Linhas da grelha de fundo ajustam-se automaticamente */
+  background-size:
+    calc(100% / (var(--grid-size))) calc(100% / var(--grid-size));
+
+ 
 }
 
-/* .pieces herda --grid-size do .game_grid pai (definido em Game_style.css */
+/* Grelha de peças — herda --grid-size do pai .game_grid */
 .pieces {
   display: grid;
-  grid-template-columns: repeat(var(--grid-size, 8), 1fr);
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  grid-template-rows:    repeat(var(--grid-size), 1fr);
   width: 100%;
   height: 100%;
 }
