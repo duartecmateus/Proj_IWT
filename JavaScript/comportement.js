@@ -654,6 +654,7 @@ function showNoMovesNotice(onDone) {
    ════════════════════════════════════════════════════ */
 
 function checkGameOver() {
+    if (currentMode?.key === 'cautious' || currentMode?.key === 'timed') return;
     if (score_classe.isComplete()) {
         gameOver = true;
         clearInterval(timerInterval);
