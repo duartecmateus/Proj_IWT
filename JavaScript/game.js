@@ -360,12 +360,12 @@ export const GAME_MODES = {
     },
     timed: {
         key: 'timed',
-        label: 'Contra o Tempo',
+        label: 'Against the time',
         timeLimitSeconds: 120,
     },
     cautious: {
         key: 'cautious',
-        label: 'Cauteloso',
+        label: 'Caution',
         maxMoves: 15,
     },
 };
