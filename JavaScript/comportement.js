@@ -422,7 +422,7 @@ function processMatches(matches) {
     setTimeout(() => {
         cells.forEach(({ row, col }) => { gridRef.grid[row][col] = null; });
 
-        const pointsGained = score_classe.calculatePoints(cells, bonus);
+        const pointsGained = score_classe.calculatePoints(cells);
         score_classe.addPoints(pointsGained);
         score_classe.addEggs(cells.length);
 

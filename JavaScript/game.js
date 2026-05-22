@@ -364,18 +364,11 @@ export function Score(totalEggs = 100) {
     /**
      * Calcula o total de pontos obtido por uma jogada com base nas células eliminadas e bónus.
      * @param {Array<{row: number, col: number}>} cells - Células totais eliminadas.
-     * @param {Array<{row: number, col: number}>} bonus - Células marcadas como bónus (dobram a pontuação).
      * @returns {number} O total de pontos ganho nesta jogada específica.
      */
-    this.calculatePoints = function (cells, bonus) {
-        const bonusKeys  = new Set(bonus.map(b => `${b.row},${b.col}`));
-        let pointsGained = 0;
-        cells.forEach(({ row, col }) => {
-            pointsGained += bonusKeys.has(`${row},${col}`)
-                ? SCORE_PER_EGG * 2
-                : SCORE_PER_EGG;
-        });
-        return pointsGained;
+    this.calculatePoints = function (cells) {
+        const n = cells.length;
+        return 10 * (n - 2);
     };
 
     /**
