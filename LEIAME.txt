@@ -9,7 +9,7 @@ funcoes/objectos de game.js: Eggs, randomEgg, Grid, Swap, Matcher, Gravity, Scor
 
 ,esforço: 50%
 
-Miguel Moreira N59712: , esforço: 33%
+Miguel Moreira N59712: Tudo relacionado com o botão "Hint", funcionalidades de teclado, modos de jogo e aos ovos especiais, esforço: 33%
 
 Requisitos essenciais: Todos
 
