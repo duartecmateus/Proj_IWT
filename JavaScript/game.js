@@ -484,9 +484,9 @@ export function Keyboard() {
 
 export const SPECIAL_EGGS = {
     NINJA: {
-        id: 'ninja',   typeIndex: 7,
+        id: 'ninja',   typeIndex: 8,
     },
     OSTRICH: {
-        id: 'ostrich', typeIndex: 8,
+        id: 'ostrich', typeIndex: 7,
     },
 };
