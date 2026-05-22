@@ -12,7 +12,6 @@ import {
    ESTADO GLOBAL
    ════════════════════════════════════════════════════ */
 
-const eggs_classe = new Eggs();
 const EGG_IMAGES  = eggs_classe.EGG_IMAGES;
 
 /* Configuração do modo e dificuldade de jogo activa  */
@@ -76,6 +75,11 @@ function cacheDOMRefs() {
     eggsHintEl  = document.getElementById('eggsHint');
 }
 
+/**
+ * Inicializa a configuração do tabuleiro e os módulos do motor de jogo com base nos parâmetros selecionados.
+ * @param {Object} config - Objeto de configuração da dificuldade ativa (ex: key, label, gridSize, totalEggs).
+ * @param {Object} mode - Objeto que dita as restrições do modo de jogo selecionado (ex: key, label, maxMoves, timeLimitSeconds).
+ */
 function startWithConfig(config, mode) {
     currentConfig = config;
     currentMode   = mode;
@@ -238,6 +242,10 @@ function showDifficultyScreen() {
    CAUTIOUS MODE FUNCTIONALITIES
    ════════════════════════════════════════════════════ */
 
+/**
+ * Evento disparado para processar e atualizar o decréscimo de movimentos no modo 'Cautious'.
+ * Encerra o jogo caso os movimentos válidos acabem.
+ */
 function checkMovesLeft() {
     if (currentMode?.key !== 'cautious') return;
     movesLeft--;
@@ -295,6 +303,11 @@ function renderGrid() {
    CLICKING — interação com células
    ════════════════════════════════════════════════════ */
 
+/**
+ * Controla os cliques nas células do tabuleiro do jogo, gerindo a seleção e a tentativa de troca de peças.
+ * @param {number} row - O índice da linha da célula clicada.
+ * @param {number} col - O índice da coluna da célula clicada.
+ */
 function handleCellClick(row, col) {
     if (isAnimating || gameOver) return;
 
@@ -317,6 +330,11 @@ function handleCellClick(row, col) {
     }
 }
 
+/**
+ * Realiza a seleção visual de uma célula específica no ecrã e guarda o estado da mesma.
+ * @param {number} row - O índice da linha a selecionar.
+ * @param {number} col - O índice da coluna a selecionar.
+ */
 function selectCell(row, col) {
     selected = { row, col };
     const cell = piecesDiv.querySelector(`[data-row="${row}"][data-col="${col}"]`);
@@ -333,6 +351,13 @@ function clearSelection() {
     selected = null;
 }
 
+/**
+ * Tenta efetuar a troca de duas peças no ecrã e no tabuleiro, aplicando as regras dos ovos especiais ou efetuando rollback caso não gere um match válido.
+ * @param {number} r1 - Linha da primeira peça.
+ * @param {number} c1 - Coluna da primeira peça.
+ * @param {number} r2 - Linha da segunda peça.
+ * @param {number} c2 - Coluna da segunda peça.
+ */
 function attemptSwap(r1, c1, r2, c2) {
     isAnimating = true;
 
@@ -374,6 +399,10 @@ function attemptSwap(r1, c1, r2, c2) {
    PROCESSAMENTO DE MATCHES (cascata)
    ════════════════════════════════════════════════════ */
 
+/**
+ * Processa em loop/cascata as animações de eliminação de peças combinadas, incrementa as pontuações e aplica a gravidade.
+ * @param {Object} matches - Objeto retornado pela classe Matcher contendo as propriedades `{ cells, bonus }`.
+ */
 function processMatches(matches) {
     const cells = matches.cells;
     const bonus = matches.bonus;
@@ -424,6 +453,10 @@ function processMatches(matches) {
    SPECIAL EGGS — spawn após match de 4+
    ════════════════════════════════════════════════════ */
 
+/**
+ * Analisa e insere de forma randómica os ovos especiais (Ninja ou Avestruz) nas células onde ocorreram combinações de bónus de 4 ou mais peças.
+ * @param {Array<{row: number, col: number}>} bonusCells - Array contendo as coordenadas das células de bónus elegíveis.
+ */
 function spawnSpecialEggs(bonusCells) {
     if (bonusCells.length === 0) return;
 
@@ -446,6 +479,10 @@ function spawnSpecialEggs(bonusCells) {
     });
 }
 
+/**
+ * Escolhe de forma pseudo-aleatória (50% de probabilidade) o índice correspondente a um ovo especial.
+ * @returns {number} Retorna o ID numérico do ovo especial Ninja (7) ou Avestruz (8).
+ */
 function pickSpecial() {
     return Math.random() < 0.5
         ? SPECIAL_EGGS.NINJA.typeIndex
@@ -456,6 +493,11 @@ function pickSpecial() {
    SPECIAL EGG EFFECTS
    ════════════════════════════════════════════════════ */
 
+/**
+ * Ativa o poder especial do ovo Ninja, recolhendo e eliminando todas as células daquela linha.
+ * @param {number} row - Linha da explosão.
+ * @param {number} col - Coluna da explosão.
+ */
 function activateNinja(row, col) {
     const GS   = currentConfig.gridSize;
     const grid = gridRef.grid;
@@ -471,6 +513,11 @@ function activateNinja(row, col) {
     applySpecialEffect(cells);
 }
 
+/**
+ * Ativa o poder especial do ovo Avestruz, recolhendo e destruindo todas as peças num raio 3x3 em torno da coordenada.
+ * @param {number} row - Linha central do impacto.
+ * @param {number} col - Coluna central do impacto.
+ */
 function activateOstrich(row, col) {
     const GS   = currentConfig.gridSize;
     const grid = gridRef.grid;
@@ -488,6 +535,10 @@ function activateOstrich(row, col) {
     applySpecialEffect(cells);
 }
 
+/**
+ * Aplica os efeitos visuais, atribuição de pontos de bónus de destruição em cascata e reaplicação do motor de gravidade para os Ovos Especiais.
+ * @param {Array<{row: number, col: number}>} cells - Lista de células afetadas pela habilidade especial.
+ */
 function applySpecialEffect(cells) {
     // Destacar visualmente
     cells.forEach(({ row, col }) => {
@@ -526,6 +577,15 @@ function applySpecialEffect(cells) {
    ANIMAÇÕES CSS
    ════════════════════════════════════════════════════ */
 
+/**
+ * Executa as animações de transição CSS para simular o deslize físico de duas peças adjacentes antes do processamento lógico da grelha.
+ * @param {number} r1 - Linha do elemento original.
+ * @param {number} c1 - Coluna do elemento original.
+ * @param {number} r2 - Linha do elemento adjacente destino.
+ * @param {number} c2 - Coluna do elemento adjacente destino.
+ * @param {Function} callback - Função a executar imediatamente após o término da transição de tempo.
+ * @param {boolean} reverse - Define se a animação em curso é um efeito de retrocesso (rollback).
+ */
 function animateSwap(r1, c1, r2, c2, callback, reverse = false) {
     const cell1 = piecesDiv.querySelector(`[data-row="${r1}"][data-col="${c1}"]`);
     const cell2 = piecesDiv.querySelector(`[data-row="${r2}"][data-col="${c2}"]`);
@@ -641,6 +701,10 @@ function startTimer() {
     }, 1000);
 }
 
+/**
+ * Formata e atualiza a componente HTML do relógio/timer HUD dependendo se o modo ativo possui ou não contagem decrescente (Time Trial).
+ * @param {number} [overrideSeconds] - Quantidade exata de segundos restantes em falta (usado no modo Time Trial).
+ */
 function updateTimerDisplay(overrideSeconds) {
     const t   = overrideSeconds ?? timerSeconds;
     const min    = Math.floor(t / 60).toString().padStart(1, '0');
@@ -681,9 +745,181 @@ function updateHeatMeter() {
 }
 
 /* ════════════════════════════════════════════════════
-   GUARDAR ESTATÍSTICAS DO JOGADOR
+   DEADLOCK
    ════════════════════════════════════════════════════ */
 
+function checkPossibleMoves() {
+    if (gameOver) return;
+    if (matcher_classe.hasPossibleMove()) return;
+
+    showNoMovesNotice(() => {
+        buildGrid();
+        renderGrid();
+    });
+}
+
+/**
+ * Apresenta um painel animado temporário no ecrã avisando o jogador de que não existem combinações possíveis e que a grelha vai sofrer um Reshuffle.
+ * @param {Function} onDone - Função de callback executada quando a animação termina (geralmente reconstrói a Grid).
+ */
+function showNoMovesNotice(onDone) {
+    const notice = document.createElement('div');
+    notice.id = 'no-moves-notice';
+    notice.textContent = 'No moves left — reshuffling!';
+    document.body.appendChild(notice);
+
+    void notice.offsetWidth;
+    notice.classList.add('visible');
+
+    setTimeout(() => {
+        notice.classList.remove('visible');
+        setTimeout(() => {
+            notice.remove();
+            onDone();
+        }, 1000);
+    }, 2000);
+}
+
+
+/* ════════════════════════════════════════════════════
+   FIM DE JOGO
+   ════════════════════════════════════════════════════ */
+
+function checkGameOver() {
+    if (currentMode?.key === 'cautious' || currentMode?.key === 'timed') return;
+    if (score_classe.isComplete()) {
+        gameOver = true;
+        clearInterval(timerInterval);
+        saveGameStats();
+        showEndScreen(true);
+    }
+}
+/* ════════════════════════════════════════════════════
+   ECRÃ FINAL — inclui tabela de pontuações
+   ════════════════════════════════════════════════════ */
+
+/**
+ * Cria dinamicamente o Modal e overlay de Fim de Jogo ("Game Over" ou "Vitória") com estatísticas e botões de navegação.
+ * @param {boolean} won - Estado booleano indicando true se o utilizador venceu o nível, false se perdeu por tempo/movimentos.
+ */
+function showEndScreen(won) {
+    const overlay = document.createElement('div');
+    overlay.id = 'game-overlay';
+    const time = document.querySelector('#timer-container .value')?.textContent
+
+    overlay.innerHTML = `
+        <div id="game-modal">
+            <p class="modal-emoji">${won ? '🥚🎉' : '😢'}</p>
+            <h2>${won ? 'ALL SCRAMBLED!' : 'GAME OVER'}</h2>
+            <p class="modal-config">${currentConfig.label}</p>
+            <p class="modal-score">Score: <strong>${score_classe.score.toLocaleString('pt-PT')}</strong></p>
+            <p class="modal-time">Time: <strong>${time|| '0:00'}</strong></p>
+            <div class="modal-buttons">
+                <button id="modal-btn-restart">↺ JOGAR NOVAMENTE</button>
+                <button class="secondary" id="modal-btn-change">🎲 MUDAR DIFICULDADE</button>
+                <button class="secondary" id="modal-btn-leaderboard">🏆 LEADERBOARD</button>
+                <button class="secondary" id="modal-btn-quit">✕ SAIR</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    /* Reiniciar com a mesma configuração */
+    overlay.querySelector('#modal-btn-restart').addEventListener('click', () => {
+        overlay.remove();
+        restartGame(false);
+    });
+
+    /* Voltar à escolha de dificuldade */
+    overlay.querySelector('#modal-btn-change').addEventListener('click', () => {
+        overlay.remove();
+        restartGame(true);
+    });
+
+    /* Sair */
+    overlay.querySelector('#modal-btn-quit').addEventListener('click', () => {
+        window.location.href = './home.html';
+    });
+
+    /* Leaderboard */
+    overlay.querySelector('#modal-btn-leaderboard').addEventListener('click', () => {
+        window.location.href = './history.html#leader';
+    });
+}
+
+/* ════════════════════════════════════════════════════
+   RESTART
+   ════════════════════════════════════════════════════ */
+
+/**
+ * @param {boolean} chooseDifficulty  Se true, mostra o ecrã de dificuldade; se false, reinicia com a configuração actual.
+ */
+function restartGame(chooseDifficulty = false) {
+    const overlay = document.getElementById('game-overlay');
+    if (overlay) overlay.remove();
+
+    clearInterval(timerInterval);
+
+    selected    = null;
+    isAnimating = false;
+    gameOver    = false;
+
+    if (chooseDifficulty || !currentConfig || !currentMode) {
+        showDifficultyScreen();
+    } else {
+        /* Reiniciar com a mesma configuração */
+        score_classe.reset(currentConfig.totalEggs);
+        cursor_row = 0;
+        cursor_col = 0;
+        movesLeft  = currentMode.maxMoves ?? 0;
+
+        updateHUD();
+        buildGrid();
+        renderGrid();
+        startTimer();
+        resetHintCooldown();
+    }
+}
+
+/* ════════════════════════════════════════════════════
+   KEYBOARD NAVIGATION
+   ════════════════════════════════════════════════════ */
+
+/**
+ * Altera a posição interna do cursor virtual controlado via teclado respeitando as fronteiras definidas do tabuleiro de jogo.
+ * @param {number} cr - Variação/Delta do índice da linha (-1 para subir, 1 para descer, 0 para manter).
+ * @param {number} cc - Variação/Delta do índice da coluna (-1 para a esquerda, 1 para a direita, 0 para manter).
+ */
+function moveCursor(cr, cc) {
+    const GS = currentConfig.gridSize;
+    cursor_row = Math.max(0 , Math.min(GS -1, cursor_row + cr));
+    cursor_col = Math.max(0 , Math.min(GS -1, cursor_col + cc));
+}
+
+document.addEventListener('keydown', (e) => {
+    if (gameOver || isAnimating || !currentConfig) return;
+
+    const move = keyboard_classe.getKeyMove(e.key)
+
+    if (move) {
+        moveCursor(move[0], move[1]);
+        renderGrid();
+        return;
+    }
+
+    if (e.key === ' ') {
+        e.preventDefault();
+        handleCellClick(cursor_row, cursor_col);
+    }
+});
+
+/* ════════════════════════════════════════════════════
+   LEADERBOARD  (por configuração, guardado em localStorage)
+   ════════════════════════════════════════════════════ */
+/**
+ * Ordena a lista global de utilizadores registados com base nos seus pontos totais acumulados e atualiza a respetiva classificação de Rank mundial.
+ * @param {Array<Object>} users - Array contendo os objetos de dados de todos os utilizadores no LocalStorage.
+ */
 function updateLocalRanks(users) {
     const sortedUsers = [...users].sort((a, b) => {
         const pointsA = Number(a.stats?.totalPoints || 0);
@@ -753,168 +989,6 @@ function saveGameStats() {
     });
 }
 
-/* ════════════════════════════════════════════════════
-   DEADLOCK
-   ════════════════════════════════════════════════════ */
-
-function checkPossibleMoves() {
-    if (gameOver) return;
-    if (matcher_classe.hasPossibleMove()) return;
-
-    showNoMovesNotice(() => {
-        buildGrid();
-        renderGrid();
-    });
-}
-
-function showNoMovesNotice(onDone) {
-    const notice = document.createElement('div');
-    notice.id = 'no-moves-notice';
-    notice.textContent = 'No moves left — reshuffling!';
-    document.body.appendChild(notice);
-
-    void notice.offsetWidth;
-    notice.classList.add('visible');
-
-    setTimeout(() => {
-        notice.classList.remove('visible');
-        setTimeout(() => {
-            notice.remove();
-            onDone();
-        }, 1000);
-    }, 2000);
-}
-
-
-/* ════════════════════════════════════════════════════
-   FIM DE JOGO
-   ════════════════════════════════════════════════════ */
-
-function checkGameOver() {
-    if (currentMode?.key === 'cautious' || currentMode?.key === 'timed') return;
-    if (score_classe.isComplete()) {
-        gameOver = true;
-        clearInterval(timerInterval);
-        saveGameStats();
-        showEndScreen(true);
-    }
-}
-/* ════════════════════════════════════════════════════
-   ECRÃ FINAL — inclui tabela de pontuações
-   ════════════════════════════════════════════════════ */
-   
-function showEndScreen(won) {
-    const overlay = document.createElement('div');
-    overlay.id = 'game-overlay';
-    const time = document.querySelector('#timer-container .value')?.textContent
-
-    overlay.innerHTML = `
-        <div id="game-modal">
-            <p class="modal-emoji">${won ? '🥚🎉' : '😢'}</p>
-            <h2>${won ? 'ALL SCRAMBLED!' : 'GAME OVER'}</h2>
-            <p class="modal-config">${currentConfig.label}</p>
-            <p class="modal-score">Score: <strong>${score_classe.score.toLocaleString('pt-PT')}</strong></p>
-            <p class="modal-time">Time: <strong>${time|| '0:00'}</strong></p>
-            <div class="modal-buttons">
-                <button id="modal-btn-restart">↺ JOGAR NOVAMENTE</button>
-                <button class="secondary" id="modal-btn-change">🎲 MUDAR DIFICULDADE</button>
-                <button class="secondary" id="modal-btn-leaderboard">🏆 LEADERBOARD</button>
-                <button class="secondary" id="modal-btn-quit">✕ SAIR</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
-
-    /* Reiniciar com a mesma configuração */
-    overlay.querySelector('#modal-btn-restart').addEventListener('click', () => {
-        overlay.remove();
-        restartGame(false);
-    });
-
-    /* Voltar à escolha de dificuldade */
-    overlay.querySelector('#modal-btn-change').addEventListener('click', () => {
-        overlay.remove();
-        restartGame(true);
-    });
-
-    /* Sair */
-    overlay.querySelector('#modal-btn-quit').addEventListener('click', () => {
-        window.location.href = './home.html';
-    });
-
-    /* Leaderboard */
-    overlay.querySelector('#modal-btn-leaderboard').addEventListener('click', () => {
-        window.location.href = './history.html#leader';
-    });
-}
-
-/* ════════════════════════════════════════════════════
-   RESTART
-   ════════════════════════════════════════════════════ */
-
-/**
- * @param {boolean} chooseDifficulty  Se true, mostra o ecrã de dificuldade;
- *                                    se false, reinicia com a configuração actual.
- */
-function restartGame(chooseDifficulty = false) {
-    const overlay = document.getElementById('game-overlay');
-    if (overlay) overlay.remove();
-
-    clearInterval(timerInterval);
-
-    selected    = null;
-    isAnimating = false;
-    gameOver    = false;
-
-    if (chooseDifficulty || !currentConfig || !currentMode) {
-        showDifficultyScreen();
-    } else {
-        /* Reiniciar com a mesma configuração */
-        score_classe.reset(currentConfig.totalEggs);
-        cursor_row = 0;
-        cursor_col = 0;
-        movesLeft  = currentMode.maxMoves ?? 0;
-
-        updateHUD();
-        buildGrid();
-        renderGrid();
-        startTimer();
-        resetHintCooldown();
-    }
-}
-
-/* ════════════════════════════════════════════════════
-   KEYBOARD NAVIGATION
-   ════════════════════════════════════════════════════ */
-
-
-function moveCursor(cr, cc) {
-    const GS = currentConfig.gridSize;
-    cursor_row = Math.max(0 , Math.min(GS -1, cursor_row + cr));
-    cursor_col = Math.max(0 , Math.min(GS -1, cursor_col + cc));
-}
-
-document.addEventListener('keydown', (e) => {
-    if (gameOver || isAnimating || !currentConfig) return;
-
-    const move = keyboard_classe.getKeyMove(e.key)
-
-    if (move) {
-        moveCursor(move[0], move[1]);
-        renderGrid();
-        return;
-    }
-
-    if (e.key === ' ') {
-        e.preventDefault();
-        handleCellClick(cursor_row, cursor_col);
-    }
-});
-
-/* ════════════════════════════════════════════════════
-   LEADERBOARD  (por configuração, guardado em localStorage)
-   ════════════════════════════════════════════════════ */
-
 /**
  * Obtém a tabela de pontuações para uma configuração específica.
  * @param  {object} config
@@ -927,8 +1001,6 @@ function getLeaderboard(config) {
 /**
  * Guarda uma nova entrada na tabela de pontuações da configuração activa.
  * Mantém apenas as 10 melhores pontuações, ordenadas por score decrescente.
- * @param {object} config
- * @param {object} entry  { name, score, time, date }
  */
 function saveToLeaderboard(config, entry) {
     let board = getLeaderboard(config);

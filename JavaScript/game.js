@@ -12,6 +12,10 @@ const SCORE_PER_EGG = 100;
    EGGS — imagens dos ovos
    ════════════════════════════════════════════════════ */
 
+/**
+ * Construtor para gerir o array de caminhos das imagens dos ovos.
+ * @constructor
+ */
 export function Eggs() {
     this.EGG_IMAGES = [
         'Imagens/ovo-vermelho.png',
@@ -26,6 +30,10 @@ export function Eggs() {
     ];
 }
 
+/**
+ * Gera um índice aleatório correspondente a um tipo de ovo normal.
+ * @returns {number} Índice numérico do ovo gerado (entre 0 e EGG_COUNT - 1).
+ */
 export function randomEgg() {
     return Math.floor(Math.random() * EGG_COUNT);
 }
@@ -36,10 +44,18 @@ export function randomEgg() {
    @param {number} gridSize  Número de linhas/colunas (default 8)
    ════════════════════════════════════════════════════ */
 
+/**
+ * Construtor que representa e inicializa o tabuleiro de jogo.
+ * @constructor
+ * @param {number} gridSize - O tamanho do tabuleiro (número de linhas e colunas).
+ */
 export function Grid(gridSize = 8) {
     this.gridSize = gridSize;
     this.grid     = [];
 
+    /**
+     * Constrói e preenche a grelha inicial garantindo que não existem combinações iniciais.
+     */
     this.buildGrid = function () {
         this.grid = [];
         for (let r = 0; r < this.gridSize; r++) {
@@ -54,6 +70,13 @@ export function Grid(gridSize = 8) {
         }
     };
 
+    /**
+     * Verifica se colocar um determinado tipo de ovo numa célula causaria uma combinação imediata de 3.
+     * @param {number} row - O índice da linha da célula.
+     * @param {number} col - O índice da coluna da célula.
+     * @param {number} type - O tipo/índice do ovo a testar.
+     * @returns {boolean} Retorna true se causar uma combinação horizontal ou vertical, false caso contrário.
+     */
     this.wouldCauseMatch = function (row, col, type) {
         if (col >= 2 &&
             this.grid[row][col - 1] === type &&
@@ -69,9 +92,22 @@ export function Grid(gridSize = 8) {
    SWAP — troca de células (sem dependência do tamanho)
    ════════════════════════════════════════════════════ */
 
+/**
+ * Construtor responsável pela lógica de verificação e troca de peças.
+ * @constructor
+ * @param {Object} gridRef - Objeto de referência que contém a matriz do tabuleiro ({ grid: Array }).
+ */
 export function Swap(gridRef) {
     this.gridRef = gridRef;
 
+    /**
+     * Verifica se duas coordenadas no tabuleiro são adjacentes (partilham um lado).
+     * @param {number} r1 - Linha da primeira célula.
+     * @param {number} c1 - Coluna da primeira célula.
+     * @param {number} r2 - Linha da segunda célula.
+     * @param {number} c2 - Coluna da segunda célula.
+     * @returns {boolean} True se forem adjacentes na horizontal ou vertical, false caso contrário.
+     */
     this.isAdjacent = function (r1, c1, r2, c2) {
         return (
             (Math.abs(r1 - r2) === 1 && Math.abs(c1 - c2) === 0) ||
@@ -79,6 +115,13 @@ export function Swap(gridRef) {
         );
     };
 
+    /**
+     * Efetua a troca de posições entre duas peças diretamente na matriz do jogo.
+     * @param {number} r1 - Linha da primeira célula.
+     * @param {number} c1 - Coluna da primeira célula.
+     * @param {number} r2 - Linha da segunda célula.
+     * @param {number} c2 - Coluna da segunda célula.
+     */
     this.swapInGrid = function (r1, c1, r2, c2) {
         const grid   = this.gridRef.grid;
         const tmp    = grid[r1][c1];
@@ -89,14 +132,23 @@ export function Swap(gridRef) {
 
 /* ════════════════════════════════════════════════════
    MATCHER — deteção de combinações
-   @param {object} gridRef   Referência à grelha { grid }
-   @param {number} gridSize  Número de linhas/colunas (default 8)
    ════════════════════════════════════════════════════ */
 
+   
+/**
+ * Construtor responsável por analisar o tabuleiro à procura de combinações válidas ou jogadas possíveis.
+ * @constructor
+ * @param {Object} gridRef - Objeto de referência que contém a matriz do tabuleiro ({ grid: Array }).
+ * @param {number} [gridSize=8] - O tamanho atual do tabuleiro.
+ */
 export function Matcher(gridRef, gridSize = 8) {
     this.gridRef  = gridRef;
     this.gridSize = gridSize;
 
+    /**
+     * Procura no tabuleiro todas as combinações horizontais e verticais de 3 ou mais ovos iguais.
+     * @returns {MatchResult} Objeto contendo os arrays de células combinadas e de bónus.
+     */
     this.findAllMatches = function () {
         const grid       = this.gridRef.grid;
         const GS         = this.gridSize;
@@ -150,7 +202,8 @@ export function Matcher(gridRef, gridSize = 8) {
     };
 
     /**
-     * Verifica se existe pelo menos um movimento válido no tabuleiro.
+     * Verifica se existe pelo menos um movimento válido no tabuleiro que resulte num match.
+     * @returns {boolean} True se houver pelo menos uma jogada possível, false caso contrário (Deadlock).
      */
     this.hasPossibleMove = function () {
         const grid = this.gridRef.grid;
@@ -182,8 +235,8 @@ export function Matcher(gridRef, gridSize = 8) {
     };
 
     /**
-     * Devolve o primeiro par de células que, ao ser trocado,
-     * produziria uma combinação — usado pelo sistema de dicas.
+     * Procura e devolve o primeiro par de células adjacentes que pode ser trocado para formar um match.
+     * @returns {Array<{row: number, col: number}>|null} Array com os dois objetos de coordenada da jogada ou null se não houver.
      */
     this.findHint = function () {
         const grid = this.gridRef.grid;
@@ -215,8 +268,9 @@ export function Matcher(gridRef, gridSize = 8) {
     };
 
     /**
-     * Varrimento rápido — devolve true assim que encontrar
-     * uma sequência de MIN_MATCH ovos iguais.
+     * Varrimento interno rápido que valida a existência imediata de qualquer match.
+     * Ignora células vazias (null) e índices de ovos especiais.
+     * @returns {boolean} True se encontrar algum alinhamento de 3 peças iguais, false caso contrário.
      */
     this._hasMatch = function () {
         const grid = this.gridRef.grid;
@@ -244,14 +298,21 @@ export function Matcher(gridRef, gridSize = 8) {
 
 /* ════════════════════════════════════════════════════
    GRAVITY — queda e reabastecimento da grelha
-   @param {object} gridRef   Referência à grelha { grid }
-   @param {number} gridSize  Número de linhas/colunas (default 8)
    ════════════════════════════════════════════════════ */
 
+/**
+ * Construtor responsável por aplicar o efeito de gravidade física e preenchimento de novas peças no tabuleiro.
+ * @constructor
+ * @param {Object} gridRef - Objeto de referência que contém a matriz do tabuleiro ({ grid: Array }).
+ * @param {number} [gridSize=8] - O tamanho do tabuleiro.
+ */
 export function Gravity(gridRef, gridSize = 8) {
     this.gridRef  = gridRef;
     this.gridSize = gridSize;
 
+    /**
+     * Faz com que as peças acima de espaços vazios (null) caiam para as posições inferiores.
+     */
     this.applyGravity = function () {
         const grid = this.gridRef.grid;
         const GS   = this.gridSize;
@@ -270,6 +331,9 @@ export function Gravity(gridRef, gridSize = 8) {
         }
     };
 
+    /**
+     * Preenche todos os espaços vazios (null) restantes no topo com novos ovos aleatórios normais.
+     */
     this.refillGrid = function () {
         const grid = this.gridRef.grid;
         const GS   = this.gridSize;
@@ -285,14 +349,24 @@ export function Gravity(gridRef, gridSize = 8) {
 
 /* ════════════════════════════════════════════════════
    SCORE — pontuação e contagem de ovos
-   @param {number} totalEggs  Ovos necessários para completar (default 100)
    ════════════════════════════════════════════════════ */
 
+/**
+ * Construtor responsável por gerir a pontuação, o progresso e objetivos do jogo.
+ * @constructor
+ * @param {number} [totalEggs=100] - Quantidade total de ovos a eliminar necessária para vencer.
+ */
 export function Score(totalEggs = 100) {
     this.totalEggs     = totalEggs;
     this.score         = 0;
     this.eggsScrambled = 0;
 
+    /**
+     * Calcula o total de pontos obtido por uma jogada com base nas células eliminadas e bónus.
+     * @param {Array<{row: number, col: number}>} cells - Células totais eliminadas.
+     * @param {Array<{row: number, col: number}>} bonus - Células marcadas como bónus (dobram a pontuação).
+     * @returns {number} O total de pontos ganho nesta jogada específica.
+     */
     this.calculatePoints = function (cells, bonus) {
         const bonusKeys  = new Set(bonus.map(b => `${b.row},${b.col}`));
         let pointsGained = 0;
@@ -304,21 +378,33 @@ export function Score(totalEggs = 100) {
         return pointsGained;
     };
 
+    /**
+     * Adiciona os pontos calculados ao score total acumulado do jogador.
+     * @param {number} points - Quantidade de pontos a somar.
+     */
     this.addPoints = function (points) {
         this.score += points;
     };
 
+    /**
+     * Incrementa o contador de ovos eliminados (sem ultrapassar o objetivo limite).
+     * @param {number} count - Número de ovos eliminados a somar.
+     */
     this.addEggs = function (count) {
         this.eggsScrambled = Math.min(this.totalEggs, this.eggsScrambled + count);
     };
 
+    /**
+     * Verifica se o objetivo de eliminação de ovos do nível foi atingido.
+     * @returns {boolean} True se os ovos eliminados forem iguais ou superiores ao objetivo, false caso contrário.
+     */
     this.isComplete = function () {
         return this.eggsScrambled >= this.totalEggs;
     };
 
     /**
-     * Repõe a pontuação.
-     * @param {number} [newTotalEggs]  Permite alterar o objetivo ao reiniciar.
+     * Repõe a pontuação e os ovos eliminados de volta a 0, permitindo redefinir o objetivo.
+     * @param {number} [newTotalEggs] - O novo objetivo de eliminação de ovos (opcional).
      */
     this.reset = function (newTotalEggs) {
         if (newTotalEggs !== undefined) this.totalEggs = newTotalEggs;
@@ -377,7 +463,17 @@ export const GAME_MODES = {
    KEYBOARD NAVIGATION
    ════════════════════════════════════════════════════ */
 
+/**
+ * Construtor auxiliar para mapear inputs de teclas de teclado físico em direções bidimensionais.
+ * @constructor
+ */
 export function Keyboard() {
+    
+    /**
+     * Traduz uma tecla pressionada (WASD) num vetor de movimento [linha, coluna].
+     * @param {string} key - O valor da propriedade `key` do evento de teclado (ex: 'w', 'a', 's', 'd').
+     * @returns {Array<number>|null} Array contendo `[deltaRow, deltaCol]` ou null se for uma tecla inválida.
+     */
     this.getKeyMove = function(key){
         const moves = {
             'w': [-1, 0],
