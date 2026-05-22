@@ -32,6 +32,11 @@ h1 {
   font-weight: bold;
 }
 
+.margin {
+  display: inline-block;
+  margin: 8px;
+}
+
 /*................. Interacteble .............*/
 
 input {
@@ -54,6 +59,7 @@ input {
 #log_btn {
   display: flex;
   height: 50px;
+  width: 400px;
   margin-top: 20px;
   margin-bottom: 20px;
   padding-left: 50px;

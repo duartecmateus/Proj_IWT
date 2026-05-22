@@ -38,6 +38,11 @@
 
  header p{
     color: #FDC500 !important;     /*MUDAR A COR PARA ALGO COM MAIS CONTRAST*/
+    border: 2px solid #00296B;
+    background-color: #00296B;
+    border-radius: 20px;
+    padding: 5px;
+    
  }
 
   header a{
@@ -51,7 +56,7 @@
  }
 
  header nav a:active {
-   color: darkblue;
+   color: #00296B;
  }
 
  .right_side{
@@ -65,7 +70,7 @@
   justify-content: center;
   align-items: center; 
   height: 50px;
-  color: darkblue;
+  color: #00296B;
   border-top: 4px solid #FDC500;
   background: #F2E8CF;
   font-size: small;
