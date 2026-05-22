@@ -33,6 +33,15 @@ h1 {
   font-weight: bold;
 }
 
+.margin {
+  display: inline-block;
+  margin: 8px;
+}
+
+.last-margin {
+  margin-bottom: 8px;
+}
+
 /*................. Interactable .............*/
 
 input {

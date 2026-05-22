@@ -7,7 +7,7 @@ handelCellClick, selectCell, clearSelection, attemptSwap, processMatches, animat
 restartGame
 funcoes/objectos de game.js: Eggs, randomEgg, Grid, Swap, Matcher, Gravity, Score, DIFFICULTY_CONFIGS
 
-,esforço: 33%
+,esforço: 50%
 
 Miguel Moreira N59712: , esforço: 33%
 
