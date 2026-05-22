@@ -5,7 +5,7 @@
 "use strict";
 
 import {
-    Eggs, Grid, Swap, Matcher, Gravity, Score, Keyboard, DIFFICULTY_CONFIGS, GAME_MODES,
+    Eggs, Grid, Swap, Matcher, Gravity, Score, Keyboard, DIFFICULTY_CONFIGS, GAME_MODES, SPECIAL_EGGS,
 } from './game.js';
 
 /* ════════════════════════════════════════════════════
@@ -246,7 +246,7 @@ function checkMovesLeft() {
         gameOver = true;
         clearInterval(timerInterval);
         saveGameStats();
-        showEndScreen(false);
+        showEndScreen(true);
     }
 }
 
@@ -339,6 +339,22 @@ function attemptSwap(r1, c1, r2, c2) {
     animateSwap(r1, c1, r2, c2, () => {
         swap_classe.swapInGrid(r1, c1, r2, c2);
 
+        // Verificar se alguma das peças trocadas é especial
+        const t1 = gridRef.grid[r1][c1];
+        const t2 = gridRef.grid[r2][c2];
+
+        if (t1 === SPECIAL_EGGS.NINJA.typeIndex || t2 === SPECIAL_EGGS.NINJA.typeIndex) {
+            const [sr, sc] = t1 === SPECIAL_EGGS.NINJA.typeIndex ? [r1, c1] : [r2, c2];
+            activateNinja(sr, sc);
+            return;
+        }
+
+        if (t1 === SPECIAL_EGGS.OSTRICH.typeIndex || t2 === SPECIAL_EGGS.OSTRICH.typeIndex) {
+            const [sr, sc] = t1 === SPECIAL_EGGS.OSTRICH.typeIndex ? [r1, c1] : [r2, c2];
+            activateOstrich(sr, sc);
+            return;
+        }
+
         const matches = matcher_classe.findAllMatches();
         renderGrid();
 
@@ -381,6 +397,8 @@ function processMatches(matches) {
         score_classe.addPoints(pointsGained);
         score_classe.addEggs(cells.length);
 
+        spawnSpecialEggs(bonus);
+
         updateHUD();
         gravity_classe.applyGravity();
         gravity_classe.refillGrid();
@@ -399,6 +417,108 @@ function processMatches(matches) {
             }
         }, 350);
 
+    }, 450);
+}
+
+/* ════════════════════════════════════════════════════
+   SPECIAL EGGS — spawn após match de 4+
+   ════════════════════════════════════════════════════ */
+
+function spawnSpecialEggs(bonusCells) {
+    if (bonusCells.length === 0) return;
+
+    const GS    = currentConfig.gridSize;
+    const grid  = gridRef.grid;
+
+    // Para cada célula bonus, tenta spawnar um especial numa posição válida
+    bonusCells.forEach(({ row, col }) => {
+        // Verifica horizontalmente: null à esquerda e à direita
+        if (col > 0 && col < GS - 1 &&
+            grid[row][col - 1] === null && grid[row][col + 1] === null) {
+            grid[row][col] = pickSpecial();
+            return;
+        }
+        // Verifica verticalmente: null em cima e em baixo
+        if (row > 0 && row < GS - 1 &&
+            grid[row - 1][col] === null && grid[row + 1][col] === null) {
+            grid[row][col] = pickSpecial();
+        }
+    });
+}
+
+function pickSpecial() {
+    return Math.random() < 0.5
+        ? SPECIAL_EGGS.NINJA.typeIndex
+        : SPECIAL_EGGS.OSTRICH.typeIndex;
+}
+
+/* ════════════════════════════════════════════════════
+   SPECIAL EGG EFFECTS
+   ════════════════════════════════════════════════════ */
+
+function activateNinja(row, col) {
+    const GS   = currentConfig.gridSize;
+    const grid = gridRef.grid;
+
+    // Elimina a linha inteira
+    const cells = [];
+    for (let c = 0; c < GS; c++) {
+        if (grid[row][c] !== null) {
+            cells.push({ row, col: c });
+        }
+    }
+
+    applySpecialEffect(cells);
+}
+
+function activateOstrich(row, col) {
+    const GS   = currentConfig.gridSize;
+    const grid = gridRef.grid;
+
+    // Elimina 3×3 à volta
+    const cells = [];
+    for (let r = row - 1; r <= row + 1; r++) {
+        for (let c = col - 1; c <= col + 1; c++) {
+            if (r >= 0 && r < GS && c >= 0 && c < GS && grid[r][c] !== null) {
+                cells.push({ row: r, col: c });
+            }
+        }
+    }
+
+    applySpecialEffect(cells);
+}
+
+function applySpecialEffect(cells) {
+    // Destacar visualmente
+    cells.forEach(({ row, col }) => {
+        const cell = piecesDiv.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+        if (cell) cell.classList.add('matched-bonus');
+    });
+
+    setTimeout(() => {
+        cells.forEach(({ row, col }) => { gridRef.grid[row][col] = null; });
+
+        const pointsGained = score_classe.calculatePoints(cells, cells); // tudo como bonus
+        score_classe.addPoints(pointsGained);
+        score_classe.addEggs(cells.length);
+
+        updateHUD();
+        gravity_classe.applyGravity();
+        gravity_classe.refillGrid();
+        renderGrid();
+
+        setTimeout(() => {
+            const next = matcher_classe.findAllMatches();
+            if (next.cells.length > 0) {
+                processMatches(next);
+            } else {
+                isAnimating = false;
+                checkGameOver();
+                checkPossibleMoves();
+                resetHintCooldown();
+                checkMovesLeft();
+            }
+        }, 350);
     }, 450);
 }
 
@@ -460,7 +580,7 @@ function resetHintCooldown() {
     hintTimeout = setTimeout(() => {
         btn.disabled = false;
         btn.classList.remove('hint-cooldown');
-    }, 100);
+    }, 10000);
 }
 
 function showHint() {
@@ -513,7 +633,7 @@ function startTimer() {
                 clearInterval(timerInterval);
                 gameOver = true;
                 saveGameStats();
-                showEndScreen(false);
+                showEndScreen(true);
             }
         } else {
             updateTimerDisplay();
