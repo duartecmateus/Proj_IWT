@@ -71,9 +71,11 @@
                     <div class="hint" id="eggsHint">100 eggs to go!</div>
                 </div>
 
-                <button id="btn_restart" onclick="window.location.href='./game_window.html'">↺ RESTART</button>
+                <div id="btn-container">
+                    <button id="btn_restart" onclick="window.location.href='./game_window.html'">↺ RESTART</button>
+                    <button id="btn_quit" onclick="window.location.href='./home.html'">✕ QUIT GAME</button>
+                </div>
                 <button id="btn_hint" disabled class="hint-cooldown">HINT (-5)</button>
-                <button id="btn_quit" onclick="window.location.href='./home.html'">✕ QUIT GAME</button>
             </div>
 
             <div class="game-board">

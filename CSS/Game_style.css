@@ -176,6 +176,13 @@ h1 {
   margin-top: 5px;
 }
 
+#btn-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  grid-gap: 10px;
+}
+
 /* Botões */
 #btn_restart {
   background: #1a2560;
@@ -186,7 +193,7 @@ h1 {
   width: 100%;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 1px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -258,7 +265,7 @@ h1 {
 
 .game_grid {
   /* Valor por omissão; JS sobrepõe com setProperty */
-  --grid-size: 15;
+  --grid-size: 8;
 
   width: min(800px, 98vw);
   aspect-ratio: 1 / 1;
@@ -309,10 +316,10 @@ h1 {
 @media screen and (max-width: 1100px) {
   #game_layout{
     flex-direction: column;
-    width: 100%;
+    width: 90%;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 20px;
   }
 
   #side_info{
@@ -320,7 +327,8 @@ h1 {
     flex-direction: row;
     justify-content: center;
     gap: 10px;
-    width: 95%;
+    width: 80%;
+
   }
 
   .container {
@@ -335,12 +343,12 @@ h1 {
   .value {
     font-size: 20px;
   }
-
+  
   #btn_restart,
-  #btn_hint
+  #btn_hint,
   #btn_quit {
     font-size: 10px;
-    width: auto;
+    width: 100px;
   }
 
   #heat-meter {
@@ -349,7 +357,7 @@ h1 {
   }
 
   .heat_bar_seg {
-    width: auto;
+    width: 27px;
   }
 
   #Tip_container {

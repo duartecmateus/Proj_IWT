@@ -17,7 +17,7 @@
  header {
   background: antiquewhite;
   position: fixed;
-  z-index: 2;
+  z-index: 5;
   top: 0px;
   left: 0;
   right: 0;
