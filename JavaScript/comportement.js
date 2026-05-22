@@ -214,8 +214,8 @@ function showDifficultyScreen() {
         const gridSize   = parseInt(sizeInput.value, 10);
         const totalEggs  = parseInt(eggsInput.value, 10);
 
-        if (isNaN(gridSize) || gridSize < 5 || gridSize > 15) {
-            errorEl.textContent = 'O tamanho deve ser entre 5 e 15.';
+        if (isNaN(gridSize) || gridSize < 5 || gridSize > 10) {
+            errorEl.textContent = 'O tamanho deve ser entre 5 e 10.';
             return;
         }
         if (isNaN(totalEggs) || totalEggs < 5 || totalEggs > 500) {
