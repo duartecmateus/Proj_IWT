@@ -350,6 +350,27 @@ export const DIFFICULTY_CONFIGS = {
 };
 
 /* ════════════════════════════════════════════════════
+   CONFIGURAÇÕES DE MODO
+   ════════════════════════════════════════════════════ */
+
+export const GAME_MODES = {
+    normal: {
+        key: 'normal',
+        label: 'Normal',
+    },
+    timed: {
+        key: 'timed',
+        label: 'Contra o Tempo',
+        timeLimitSeconds: 120,
+    },
+    cautious: {
+        key: 'cautious',
+        label: 'Cauteloso',
+        maxMoves: 15,
+    },
+};
+
+/* ════════════════════════════════════════════════════
    KEYBOARD NAVIGATION
    ════════════════════════════════════════════════════ */
 

@@ -5,7 +5,7 @@
 "use strict";
 
 import {
-    Eggs, Grid, Swap, Matcher, Gravity, Score, Keyboard, DIFFICULTY_CONFIGS,
+    Eggs, Grid, Swap, Matcher, Gravity, Score, Keyboard, DIFFICULTY_CONFIGS, GAME_MODES,
 } from './game.js';
 
 /* ════════════════════════════════════════════════════
@@ -15,8 +15,10 @@ import {
 const eggs_classe = new Eggs();
 const EGG_IMAGES  = eggs_classe.EGG_IMAGES;
 
-/* Configuração do modo de jogo activa  */
+/* Configuração do modo e dificuldade de jogo activa  */
 let currentConfig  = null;
+let currentMode    = null;
+let movesLeft      = 0;
 
 /* Instâncias dos módulos do jogo  */
 let grid_classe    = null;
@@ -74,8 +76,9 @@ function cacheDOMRefs() {
     eggsHintEl  = document.getElementById('eggsHint');
 }
 
-function startWithConfig(config) {
+function startWithConfig(config, mode) {
     currentConfig = config;
+    currentMode   = mode;
 
     /* Recriar todos os módulos do jogo com os novos parâmetros */
     grid_classe    = new Grid(config.gridSize);
@@ -91,6 +94,7 @@ function startWithConfig(config) {
     gameOver    = false;
     cursor_row  = 0;
     cursor_col  = 0;
+    movesLeft   = mode.maxMoves ?? 0;
 
     /* Actualizar a variável CSS --grid-size no contentor do tabuleiro.
        O CSS usa repeat(var(--grid-size), 1fr) e calc(100% / var(--grid-size))
@@ -120,6 +124,8 @@ function showDifficultyScreen() {
     const existing = document.getElementById('difficulty-overlay');
     if (existing) existing.remove();
 
+    let selectedMode = null;
+
     const overlay = document.createElement('div');
     overlay.id = 'difficulty-overlay';
     overlay.innerHTML = `
@@ -127,49 +133,76 @@ function showDifficultyScreen() {
             <h2>🥚 Choose the dificulty</h2>
 
             <div class="difficulty-presets">
-                <button class="diff-btn diff-easy" data-diff="easy">
-                    <span class="diff-label">Easy</span>
-                    <span class="diff-desc">8 × 8 · 20 eggs</span>
+                <button class="diff-btn mode-btn ${selectedMode === 'normal'   ? 'active' : ''}" data-mode="normal">
+                    <span class="diff-label"> Normal</span>
+                    <span class="diff-desc">Reach the limit of eggs</span>
                 </button>
-                <button class="diff-btn diff-medium" data-diff="medium">
-                    <span class="diff-label">Normal</span>
-                    <span class="diff-desc">9 × 9 · 25 eggs</span>
+                <button class="diff-btn mode-btn ${selectedMode === 'timed'    ? 'active' : ''}" data-mode="timed">
+                    <span class="diff-label">⏱ Time Trial</span>
+                    <span class="diff-desc">2 minutes to score as much as possible</span>
                 </button>
-                <button class="diff-btn diff-hard" data-diff="hard">
-                    <span class="diff-label">Hard</span>
-                    <span class="diff-desc">10 × 10 · 30 eggs</span>
+                <button class="diff-btn mode-btn ${selectedMode === 'cautious' ? 'active' : ''}" data-mode="cautious">
+                    <span class="diff-label"> Cautious</span>
+                    <span class="diff-desc">Only 15 moves</span>
                 </button>
             </div>
 
-            <div class="difficulty-custom">
-                <h3>⚙️ Personalize</h3>
-                <div class="custom-inputs">
-                    <div class="custom-field">
-                        <label>Grid Size</label>
-                        <input type="number" id="custom-size"
-                               min="5" max="15" value="8"
-                               title="Entre 5 e 15">
-                    </div>
-                    <div class="custom-field">
-                        <label>Eggs to eliminate</label>
-                        <input type="number" id="custom-eggs"
-                               min="5" max="500" value="20"
-                               title="Entre 5 e 500">
-                    </div>
+            <div id="difficulty-section" style="display:none">
+                <div class="difficulty-presets">
+                    <button class="diff-btn diff-easy" data-diff="easy">
+                        <span class="diff-label">Easy</span>
+                        <span class="diff-desc">8 × 8 · 20 eggs</span>
+                    </button>
+                    <button class="diff-btn diff-medium" data-diff="medium">
+                        <span class="diff-label">Normal</span>
+                        <span class="diff-desc">9 × 9 · 25 eggs</span>
+                    </button>
+                    <button class="diff-btn diff-hard" data-diff="hard">
+                        <span class="diff-label">Hard</span>
+                        <span class="diff-desc">10 × 10 · 30 eggs</span>
+                    </button>
                 </div>
-                <button id="btn-custom-start">▶ Start personalized Grid</button>
-                <p class="custom-error" id="custom-error"></p>
+
+                <div class="difficulty-custom">
+                    <h3>⚙️ Personalize</h3>
+                    <div class="custom-inputs">
+                        <div class="custom-field">
+                            <label>Grid Size</label>
+                            <input type="number" id="custom-size"
+                                min="5" max="15" value="8"
+                                title="Entre 5 e 15">
+                        </div>
+                        <div class="custom-field">
+                            <label>Eggs to eliminate</label>
+                            <input type="number" id="custom-eggs"
+                                min="5" max="500" value="20"
+                                title="Entre 5 e 500">
+                        </div>
+                    </div>
+                    <button id="btn-custom-start">▶ Start personalized Grid</button>
+                    <p class="custom-error" id="custom-error"></p>
+                </div>
             </div>
         </div>
     `;
     document.body.appendChild(overlay);
 
-    /* Botões de dificuldade pré-definida */
-    overlay.querySelectorAll('.diff-btn').forEach(btn => {
+    // Escolha do modo — revela a secção de dificuldade
+    overlay.querySelectorAll('.mode-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const key = btn.dataset.diff;
+            overlay.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedMode = btn.dataset.mode;
+            overlay.querySelector('#difficulty-section').style.display = 'block';
+        });
+    });
+
+    /* Botões de dificuldade pré-definida */
+    overlay.querySelectorAll('.diff-btn[data-diff]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (!selectedMode) return;
             overlay.remove();
-            startWithConfig(DIFFICULTY_CONFIGS[key]);
+            startWithConfig(DIFFICULTY_CONFIGS[btn.dataset.diff], GAME_MODES[selectedMode]);
         });
     });
 
@@ -197,8 +230,24 @@ function showDifficultyScreen() {
             label:     `Personalized ${gridSize}×${gridSize} · ${totalEggs} eggs`,
             gridSize,
             totalEggs,
-        });
+        }, GAME_MODES[selectedMode]);
     });
+}
+
+/* ════════════════════════════════════════════════════
+   CAUTIOUS MODE FUNCTIONALITIES
+   ════════════════════════════════════════════════════ */
+
+function checkMovesLeft() {
+    if (currentMode?.key !== 'cautious') return;
+    movesLeft--;
+    updateHUD();
+    if (movesLeft <= 0) {
+        gameOver = true;
+        clearInterval(timerInterval);
+        saveGameStats();
+        showEndScreen(false);
+    }
 }
 
 /* ════════════════════════════════════════════════════
@@ -346,6 +395,7 @@ function processMatches(matches) {
                 checkGameOver();
                 checkPossibleMoves();
                 resetHintCooldown();
+                checkMovesLeft();
             }
         }, 350);
 
@@ -455,13 +505,26 @@ function startTimer() {
     timerSeconds  = 0;
     timerInterval = setInterval(() => {
         timerSeconds++;
-        updateTimerDisplay();
+
+        if (currentMode?.key === 'timed') {
+            const remaining = currentMode.timeLimitSeconds - timerSeconds;
+            updateTimerDisplay(remaining);
+            if (remaining <= 0) {
+                clearInterval(timerInterval);
+                gameOver = true;
+                saveGameStats();
+                showEndScreen(false);
+            }
+        } else {
+            updateTimerDisplay();
+        }
     }, 1000);
 }
 
-function updateTimerDisplay() {
-    const min    = Math.floor(timerSeconds / 60).toString().padStart(1, '0');
-    const sec    = (timerSeconds % 60).toString().padStart(2, '0');
+function updateTimerDisplay(overrideSeconds) {
+    const t   = overrideSeconds ?? timerSeconds;
+    const min    = Math.floor(t / 60).toString().padStart(1, '0');
+    const sec    = (t % 60).toString().padStart(2, '0');
     const timerEl = document.querySelector('#timer-container .value');
     if (timerEl) timerEl.textContent = `${min}:${sec}`;
 }
@@ -475,10 +538,15 @@ function updateHUD() {
     if (eggsBarEl)   eggsBarEl.style.width   = `${(score_classe.eggsScrambled / totalEggs) * 100}%`;
 
     if (eggsHintEl) {
-        const remaining = totalEggs - score_classe.eggsScrambled;
-        eggsHintEl.textContent = remaining > 0
-            ? `${remaining} eggs to go!`
-            : '🎉 All scrambled!';
+        if (currentMode?.key === 'cautious') {
+            eggsHintEl.textContent = `${movesLeft} moves left!`;
+        } else {
+            const remaining = totalEggs - score_classe.eggsScrambled;
+            eggsHintEl.textContent = remaining > 0
+                ? `${remaining} eggs to go!`
+                : '🎉 All scrambled!';    
+        }
+        
     }
 
     updateHeatMeter();
@@ -660,13 +728,14 @@ function restartGame(chooseDifficulty = false) {
     isAnimating = false;
     gameOver    = false;
 
-    if (chooseDifficulty || !currentConfig) {
+    if (chooseDifficulty || !currentConfig || !currentMode) {
         showDifficultyScreen();
     } else {
         /* Reiniciar com a mesma configuração */
         score_classe.reset(currentConfig.totalEggs);
         cursor_row = 0;
         cursor_col = 0;
+        movesLeft  = currentMode.maxMoves ?? 0;
 
         updateHUD();
         buildGrid();
@@ -682,14 +751,13 @@ function restartGame(chooseDifficulty = false) {
 
 
 function moveCursor(cr, cc) {
-  cursor_row = Math.max(0 , Math.min(GRID_SIZE -1, cursor_row + cr));
-  cursor_col = Math.max(0 , Math.min(GRID_SIZE -1, cursor_col + cc));
+    const GS = currentConfig.gridSize;
+    cursor_row = Math.max(0 , Math.min(GS -1, cursor_row + cr));
+    cursor_col = Math.max(0 , Math.min(GS -1, cursor_col + cc));
 }
 
 document.addEventListener('keydown', (e) => {
     if (gameOver || isAnimating || !currentConfig) return;
-
-    const GS = currentConfig.gridSize;
 
     const move = keyboard_classe.getKeyMove(e.key)
 
