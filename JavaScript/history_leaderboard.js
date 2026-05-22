@@ -188,14 +188,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 openPlayerModal(user, rank);
             });
         } else {
-            // Se não existir jogador para esta posição, mostra "[redacted]"
+            // Se não existir jogador para esta posição, mostra "[incubating]"
             card.innerHTML = `
                 <div class="rank-info">
                     <span class="rank-number">#${rank}</span>
                     <span class="avatar">❔</span>
-                    <span class="player-name">[redacted]</span>
+                    <span class="player-name">[incubating]</span>
                 </div>
-                <div class="world-score">[redacted]</div>
+                <div class="world-score">[incubating]</div>
             `;
         }
 
